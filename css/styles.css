@@ -33,6 +33,30 @@ main {
     flex-wrap: wrap;
 }
 
+.brand{
+    height: 5px;
+    display: block; 
+    margin-bottom: 100px; 
+    z-index: 500;
+    padding-bottom: 20px;
+    position: fixed;
+    left: 65px;
+    top: 50px;
+}
+
+.brand img {
+    width: 300px; 
+    z-index: 500;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+.brand .bx {
+	min-width: 60px;
+	display: flex;
+	justify-content: center;
+}
+
 .header {
     margin-bottom: 40px;
     text-align: center;

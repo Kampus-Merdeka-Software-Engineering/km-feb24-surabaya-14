@@ -526,6 +526,8 @@ body {
     font-family: var(--lato);
     position: fixed;
     bottom: 0;
+    padding-top: 10px;
+    margin-top: 10px;
     left: 200px;
     width: 100%;
 	z-index: 1000;

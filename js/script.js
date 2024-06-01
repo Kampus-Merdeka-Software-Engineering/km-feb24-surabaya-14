@@ -74,3 +74,43 @@ switchMode.addEventListener('change', function () {
 		document.body.classList.remove('dark');
 	}
 })
+
+document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('navbar');
+
+    burger.addEventListener('click', () => {
+    nav.classList.toggle('nav-active');
+    burger.classList.toggle('toggle');
+    });
+})
+
+$(document).ready(function() {
+    $.getJSON('Superstore.json', function(Superstore) {
+        $('#datasetTable').DataTable({
+            data: Superstore,
+            columns: [
+                { data: 'Order_ID' },
+                { data: 'Order_Date' },
+                { data: 'Ship_Date' },
+                { data: 'Ship_Mode' },
+                { data: 'Customer_ID' },
+                { data: 'Customer_Name' },
+                { data: 'Product_ID' },
+                { data: 'Category' },
+                { data: 'Product_Name' },
+                { data: 'Sales' },
+                { data: 'Quantity' },
+                { data: 'Discount' },
+                { data: 'Profit' }
+            ],
+            pageLength: 100,
+            dom: 'Bfrtip',
+            buttons: [
+                'csv', 'excel', 'pdf', 'print'
+            ],
+            autoWidth: false, /* Memastikan lebar kolom tidak diatur otomatis */
+            responsive: true /* Membuat tabel responsif */
+        });
+    });
+});

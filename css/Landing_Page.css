@@ -98,7 +98,7 @@ nav ul.navbar li a {
 
 .background {
     position: relative;
-    background: url('assets/Giant Superstore 1.png') no-repeat center center/cover;
+    background: url('assets/Giant_Superstore.png') no-repeat center center/cover;
     display: flex;
     justify-content: center;
     align-items: center;

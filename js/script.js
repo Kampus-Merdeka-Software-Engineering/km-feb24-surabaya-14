@@ -242,34 +242,66 @@ const bestSellerCityChart = new Chart(bestSellerCityChartCtx, {
 		indexAxis: 'y',
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value, index, values) {
+                        return '$' + value.toFixed(2);
+                    }
+                }
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return '$' + tooltipItem.raw.toFixed(2);
+                    }
+                }
             }
         }
     }
 });
-
+// TAMBAHAN  
 const topProfitableCityChartCtx = document.getElementById('topProfitableCityChart').getContext('2d');
 const topProfitableCityChart = new Chart(topProfitableCityChartCtx, {
     type: 'bar',
     data: {
         labels: ['New York City', 'Los Angeles', 'Seattle San', 'San Fransisco', 'Columbus'],
         datasets: [
-			{
-				label: 'Profit',
-				backgroundColor: 'rgb(124, 191, 125)',
-				data: [652.43, 395.42,  354.43,  274.26, 111.73],
-				borderWidth: 1
-			  }]
+            {
+                label: 'Profit',
+                backgroundColor: 'rgb(124, 191, 125)',
+                data: [652.43, 395.42, 354.43, 274.26, 111.73],
+                borderWidth: 1
+            }
+        ]
     },
     options: {
-		indexAxis: 'y',
+        indexAxis: 'y',
         scales: {
             y: {
-                beginAtZero: true
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value, index, values) {
+                        return '$' + value.toFixed(2);
+                    }
+                }
+            }
+        },
+        plugins: {
+            tooltip: {
+                callbacks: {
+                    label: function(tooltipItem) {
+                        return '$' + tooltipItem.raw.toFixed(2);
+                    }
+                }
             }
         }
     }
 });
+
+
+
 
 // Sampai sini js CHART 
 
@@ -322,3 +354,4 @@ $(document).ready(function() {
         });
     });
 });
+

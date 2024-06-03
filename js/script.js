@@ -63,7 +63,7 @@ window.addEventListener('resize', function () {
 	}
 })
 
-// Ditambah Dari sini
+// Ditambah Dari sini data CHART 
 
 const doughnut1ctx = document.getElementById('doughnut1').getContext('2d');
 const doughnut1chart = new Chart(doughnut1ctx, {
@@ -247,7 +247,31 @@ const bestSellerCityChart = new Chart(bestSellerCityChartCtx, {
         }
     }
 });
-// Sampai sini
+
+const topProfitableCityChartCtx = document.getElementById('topProfitableCityChart').getContext('2d');
+const topProfitableCityChart = new Chart(topProfitableCityChartCtx, {
+    type: 'bar',
+    data: {
+        labels: ['New York City', 'Los Angeles', 'Seattle San', 'San Fransisco', 'Columbus'],
+        datasets: [
+			{
+				label: 'Profit',
+				backgroundColor: 'rgb(124, 191, 125)',
+				data: [652.43, 395.42,  354.43,  274.26, 111.73],
+				borderWidth: 1
+			  }]
+    },
+    options: {
+		indexAxis: 'y',
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+// Sampai sini js CHART 
 
 const switchMode = document.getElementById('switch-mode');
 

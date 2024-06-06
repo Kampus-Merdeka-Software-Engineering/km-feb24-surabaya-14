@@ -1,0 +1,408 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+:root {
+	--poppins: 'Poppins', sans-serif;
+	--lato: 'Lato', sans-serif;
+
+	--light: #F9F9F9;
+	--blue: #3C91E6;
+	--light-blue: #CFE8FF;
+	--grey: #eee;
+	--dark-grey: #AAAAAA;
+	--dark: #342E37;
+	--red: #DB504A;
+	--yellow: #FCBA2D;
+	--light-yellow: #FFF2C6;
+	--orange: #FD7238;
+	--light-orange: #FFE0D3;
+    --green : #1F674A;
+    --light-green : #398166;
+
+
+}
+
+html {
+	overflow-x: hidden;
+}
+
+
+body {
+    background: var(--grey);
+	overflow-x: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 1.5em;
+    margin: 0.5em;
+    font-family: var(--lato);
+    animation: fadeInFromLeft 1.5s ease-in-out;
+}
+
+header .logo {
+    height: auto;
+}
+
+.logo img {
+    width: 50%;
+    max-width: 150px; /* Atur max-width agar logo tidak terlalu besar */
+    height: auto; /* Pastikan tinggi otomatis mengikuti lebar untuk menjaga aspek rasio */
+}
+
+.navbar {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+    margin: 0;
+    padding-right: 0.4em;
+    transition: all 0.5s ease;
+}
+
+nav ul.navbar li a {
+    text-decoration: none;
+    color: var(--grey);
+    font-weight: bold;
+}
+
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--grey);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+
+.background {
+    position: relative;
+    background: url('/assets/Giant_Superstore.png') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+    border-radius: 1.5em;
+    margin: 0.5em;
+    padding: 0;
+    animation: complexAnimation 2s ease-in-out;
+}
+
+.case {
+    position: absolute;
+    right: 5.5rem;
+    bottom: 2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    border-radius: 10px;
+    font-family: var(--poppins);
+    color: white;
+    max-width: 90%;
+    animation: fadeInFromTop 2s ease-in-out;
+}
+
+
+.definition {
+    padding: 2rem;
+    margin: 0.5em;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    border-radius: 1.5em;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 2rem;
+}
+
+.explain { 
+    padding: 1rem;
+    border-radius: 10px;
+    max-width: 90%; /* Radius sudut border */
+    margin-left: 6.6rem;
+    margin-bottom: 2rem;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeInFromBottom 1.5s ease-in-out;
+}
+
+.explain h2 {
+    margin-top: 0;
+    text-align: center;
+    font-family: var(--lato);
+    font-weight: bold;
+}
+
+.explain p {
+    text-align: center;
+    font-family: var(--poppins);
+    font-size: 1.2em;
+}
+
+.cycle{
+    display: flex;
+    gap: 2rem;
+}
+
+
+
+.cards {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-size: 20px;
+    opacity: 0; /* Mulai dengan tidak terlihat */
+    animation: fadeInUp 1s ease-in-out forwards;
+}
+
+.cards:nth-child(1) {
+    animation-delay: 0.1s; /* Penundaan animasi untuk kartu pertama */
+}
+
+.cards:nth-child(2) {
+    animation-delay: 0.3s; /* Penundaan animasi untuk kartu kedua */
+}
+
+.cards:nth-child(3) {
+    animation-delay: 0.5s; /* Penundaan animasi untuk kartu ketiga */
+}
+
+/* Tambahkan lebih banyak penundaan animasi untuk kartu tambahan */
+.cards:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+.cards:nth-child(5) {
+    animation-delay: 0.9s;
+}
+
+.cards span {
+    display: flex;
+    justify-content: center;
+}
+
+.cards p {
+    font-family: var(--poppins);
+}
+
+.cards h3 {
+    font-family: var(--lato);
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 0.5rem;
+    font-family: var(--poppins);
+    text-align: center;
+}
+
+/* Media Queries untuk Responsive Design */
+
+@media (max-width: 1200px) {
+    .logo img {
+        justify-content: center;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar{
+        flex-direction: row;
+        gap: 1rem;
+    }
+
+    .background {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .case {
+        right: auto;
+        bottom: auto;
+        left: 1rem;
+        top: 1rem;
+    }
+
+    .definition {
+        padding: 1rem;
+    }
+
+    .explain {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .cycle {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: var(--dark);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .burger {
+        display: block;
+    }
+
+    nav ul.navbar.nav-active {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .burger.toggle .line1 {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .burger.toggle .line2 {
+        opacity: 0;
+    }
+
+    .burger.toggle .line3 {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+}
+
+@media (max-width: 500px) {
+    header {
+        padding: 0.5rem;
+        margin: 0;
+    }
+
+    .logo img {
+        width: 80px;
+        max-width: none;
+    }
+
+    .navbar {
+        gap: 0.5rem;
+    }
+
+    .background {
+        margin: 0;
+        border-radius: 0;
+        background-size: cover;
+    }
+
+    .case {
+        padding: 0.5rem;
+        font-size: 0.8em;
+        left: 0.5rem;
+        right: 0.5rem;
+        top: auto;
+        bottom: auto;
+    }
+
+    .definition {
+        padding: 0.5rem;
+        margin: 0;
+    }
+
+    .explain {
+        padding: 0.5rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .cycle {
+        gap: 0.5rem;
+    }
+
+    .cards {
+        padding: 0.5rem;
+        font-size: 0.8em;
+    }
+
+    footer {
+        padding: 0.5rem;
+        font-size: 0.8em;
+    }
+}
+
+@keyframes fadeInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100%); /* Menggeser elemen ke atas */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Mengembalikan elemen ke posisi semula */
+    }
+}
+
+@keyframes fadeInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes fadeInFromBottom {
+    from {
+        opacity: 0;
+        transform: translateY(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(0);
+    }
+}
+
+@keyframes complexAnimation {
+    from {
+        opacity: 0;
+        transform: translateX(100%) translateY(20px) scale(0.8); /* Mulai dari kanan, sedikit ke bawah, dan lebih kecil */
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0) translateY(0) scale(1); /* Kembali ke posisi semula, ukuran normal */
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(100px); /* Mulai dari bawah */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Kembali ke posisi semula */
+    }
+}

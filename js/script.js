@@ -300,6 +300,76 @@ const topProfitableCityChart = new Chart(topProfitableCityChartCtx, {
     }
 });
 
+const doughnut2ctx = document.getElementById('doughnut2').getContext('2d');
+const doughnut2chart = new Chart(doughnut2ctx, {
+  type: 'doughnut',
+  data: {
+	labels: ['Consumer', 'Corporate', 'Home Office'],
+	datasets: [{
+	  label: 'Distribusi Order by Segment',
+	  data: [2.586, 1.514, 909],
+	  borderWidth: 1,
+	  backgroundColor: [
+      'rgb(124, 191, 125)',
+      'rgb(34, 110, 30)',
+      'rgb(34, 34, 34)'
+    ],
+	}],
+  },
+  options: {
+	scales: {
+	  y: {
+		beginAtZero: true
+	  }
+	}
+  }
+});
+
+const salesbySegmentChartCtx = document.getElementById('salesbySegmentChart').getContext('2d');
+const salesbySegmentChart = new Chart(salesbySegmentChartCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Consumer', 'Corporate', 'Home Office'],
+        datasets: [
+			{
+				label: 'Sales',
+				backgroundColor: 'rgb(124, 191, 125)',
+				data: [546.712, 302.178, 179.106],
+				borderWidth: 1
+			  }]
+    },
+    options: {
+		indexAxis: 'y',
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+const profitbySegmentChartCtx = document.getElementById('profitbySegmentChart').getContext('2d');
+const profitbySegmentChart = new Chart(profitbySegmentChartCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Consumer', 'Corporate', 'Home Office'],
+        datasets: [
+			{
+				label: 'Profit',
+				backgroundColor: 'rgb(124, 191, 125)',
+				data: [2.236 , 1.358, 842.935],
+				borderWidth: 1
+			  }]
+    },
+    options: {
+		indexAxis: 'y',
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 
 
 

@@ -1,95 +1,91 @@
-const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
-allSideMenu.forEach(item=> {
-	const li = item.parentElement;
-
-	item.addEventListener('click', function () {
-		allSideMenu.forEach(i=> {
-			i.parentElement.classList.remove('active');
-		})
-		li.classList.add('active');
-	})
-});
-
-
-
-
-// TOGGLE SIDEBAR
-const menuBar = document.querySelector('#content nav .bx.bx-menu');
-const sidebar = document.getElementById('sidebar');
-
-menuBar.addEventListener('click', function () {
-	sidebar.classList.toggle('hide');
-})
-
-
-
-
-
-
-
-const searchButton = document.querySelector('#content nav form .form-input button');
-const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
-const searchForm = document.querySelector('#content nav form');
-
-searchButton.addEventListener('click', function (e) {
-	if(window.innerWidth < 576) {
-		e.preventDefault();
-		searchForm.classList.toggle('show');
-		if(searchForm.classList.contains('show')) {
-			searchButtonIcon.classList.replace('bx-search', 'bx-x');
-		} else {
-			searchButtonIcon.classList.replace('bx-x', 'bx-search');
-		}
-	}
-})
-
-
-
-
-
-if(window.innerWidth < 768) {
-	sidebar.classList.add('hide');
-} else if(window.innerWidth > 576) {
-	searchButtonIcon.classList.replace('bx-x', 'bx-search');
-	searchForm.classList.remove('show');
-}
-
-
-window.addEventListener('resize', function () {
-	if(this.innerWidth > 576) {
-		searchButtonIcon.classList.replace('bx-x', 'bx-search');
-		searchForm.classList.remove('show');
-	}
-})
 
 // Ditambah Dari sini data CHART 
-
-const doughnut1ctx = document.getElementById('doughnut1').getContext('2d');
-const doughnut1chart = new Chart(doughnut1ctx, {
-  type: 'doughnut',
-  data: {
-	labels: ['Buyer', 'Discount Hunter', 'Royal Buyer'],
-	datasets: [{
-	  label: 'Total Customers by Type Customers',
-	  data: [788, 695, 609],
-	  borderWidth: 1,
-	  backgroundColor: [
-      'rgb(124, 191, 125)',
-      'rgb(34, 110, 30)',
-      'rgb(34, 34, 34)'
-    ],
-	}],
-  },
-  options: {
-	scales: {
-	  y: {
-		beginAtZero: true
-	  }
-	}
+// Fungsi untuk memuat data dari file JSON
+// Fungsi untuk memuat data dari file JSON
+function fetchData(url, callback) {
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Data loaded:", data); // Tambahkan log ini
+        callback(data);
+      })
+      .catch(error => console.error('Error loading data:', error));
   }
-});
-
+  
+  // Fungsi untuk memproses data sesuai kebutuhan chart
+  function processData(data, chartType) {
+    console.log("Processing data for chart type:", chartType);
+  
+    switch (chartType) {
+      case 'doughnut1':
+        const segmentLabels = ['Royal Buyer', 'Buyer', 'Discount Hunter'];
+        const segmentColors = ['rgb(124, 191, 125)', 'rgb(34, 110, 30)', 'rgb(34, 34, 34)'];
+        const segmentCount = segmentLabels.reduce((acc, label) => {
+          acc[label] = 0;
+          return acc;
+        }, {});
+  
+        data.forEach(item => {
+          if (item.Segment === 'Outlier Bawah') segmentCount['Discount Hunter']++;
+          if (item.Segment === 'Outliir ATas') segmentCount['Royal Buyer']++;
+          if (item.Segment === 'Bukan Outlier') segmentCount['Buyer']++;
+        });
+  
+        return {
+          labels: segmentLabels,
+          datasets: [{
+            label: 'Total Customers by Type Customers',
+            data: Object.values(segmentCount),
+            borderWidth: 1,
+            backgroundColor: segmentColors
+          }]
+        };
+      // Tambahkan case untuk chart lainnya di sini jika diperlukan
+      default:
+        return {};
+    }
+  }
+  
+  // Fungsi untuk menginisialisasi atau memperbarui chart
+  function initializeChart(ctx, chartType, data) {
+    const processedData = processData(data, chartType);
+    console.log("Processed data:", processedData); // Tambahkan log ini
+    return new Chart(ctx, {
+      type: 'doughnut',
+      data: processedData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            enabled: true,
+          },
+        },
+        elements: {
+          arc: {
+            borderWidth: 2,
+            borderColor: '#ffffff', // Tambahkan warna border
+          },
+        },
+      }
+    });
+  }
+  
+  // Contoh penggunaan
+  const doughnut1ctx = document.getElementById('doughnut1').getContext('2d');
+  fetchData('./Superstore.json', data => {
+    initializeChart(doughnut1ctx, 'doughnut1', data);
+  });
+  
 
 const lineCtx = document.getElementById('lineChart').getContext('2d');
 const lineChart = new Chart(lineCtx, {
@@ -374,54 +370,4 @@ const profitbySegmentChart = new Chart(profitbySegmentChartCtx, {
 
 
 // Sampai sini js CHART 
-
-const switchMode = document.getElementById('switch-mode');
-
-switchMode.addEventListener('change', function () {
-	if(this.checked) {
-		document.body.classList.add('dark');
-	} else {
-		document.body.classList.remove('dark');
-	}
-})
-
-document.addEventListener('DOMContentLoaded', () => {
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('navbar');
-
-    burger.addEventListener('click', () => {
-    nav.classList.toggle('nav-active');
-    burger.classList.toggle('toggle');
-    });
-})
-
-$(document).ready(function() {
-    $.getJSON('Superstore.json', function(Superstore) {
-        $('#datasetTable').DataTable({
-            data: Superstore,
-            columns: [
-                { data: 'Order_ID' },
-                { data: 'Order_Date' },
-                { data: 'Ship_Date' },
-                { data: 'Ship_Mode' },
-                { data: 'Customer_ID' },
-                { data: 'Customer_Name' },
-                { data: 'Product_ID' },
-                { data: 'Category' },
-                { data: 'Product_Name' },
-                { data: 'Sales' },
-                { data: 'Quantity' },
-                { data: 'Discount' },
-                { data: 'Profit' }
-            ],
-            pageLength: 100,
-            dom: 'Bfrtip',
-            buttons: [
-                'csv', 'excel', 'pdf', 'print'
-            ],
-            autoWidth: false, /* Memastikan lebar kolom tidak diatur otomatis */
-            responsive: true /* Membuat tabel responsif */
-        });
-    });
-});
 

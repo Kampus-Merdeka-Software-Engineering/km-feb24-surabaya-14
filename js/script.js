@@ -31,9 +31,9 @@ function fetchData(url, callback) {
         }, {});
   
         data.forEach(item => {
-          if (item.Is Outlier === 'Outlier Bawah') outliersCount['Diskon Hunter']++;
-          if (item.Is Outlier  === 'Outliir ATas') outliersCount['Royal Buyer']++;
-          if (item.Is Outlier  === 'Bukan Outlier') outliersCount['Buyer']++;
+          if (item.Is_Outlier === 'Outlier Bawah') outliersCount['Diskon Hunter']++;
+          if (item.Is_Outlier  === 'Outliir ATas') outliersCount['Royal Buyer']++;
+          if (item.Is_Outlier  === 'Bukan Outlier') outliersCount['Buyer']++;
         });
   
         return {

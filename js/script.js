@@ -23,21 +23,21 @@ function fetchData(url, callback) {
   
     switch (chartType) {
       case 'doughnut1':
-        const outliersLabels = ['Royal Buyer', 'Buyer', 'Diskon Hunter'];
-        const outliersColors = ['rgb(124, 191, 125)', 'rgb(34, 110, 30)', 'rgb(34, 34, 34)'];
-        const outliersCount = outliersLabels.reduce((acc, label) => {
+        const OutlierLabels = ['Royal Buyer', 'Buyer', 'Diskon Hunter'];
+        const OutlierColors = ['rgb(124, 191, 125)', 'rgb(34, 110, 30)', 'rgb(34, 34, 34)'];
+        const OutlierCount = OutlierLabels.reduce((acc, label) => {
           acc[label] = 0;
           return acc;
         }, {});
   
         data.forEach(item => {
-          if (item.Is_Outlier === 'Outlier Bawah') outliersCount['Diskon Hunter']++;
-          if (item.Is_Outlier  === 'Outliir ATas') outliersCount['Royal Buyer']++;
-          if (item.Is_Outlier  === 'Bukan Outlier') outliersCount['Buyer']++;
+          if (item.Outlier === 'Outlier Bawah') OutlierCount['Diskon Hunter']++;
+          if (item.Outlier  === 'Outliir ATas') OutlierCount['Royal Buyer']++;
+          if (item.Outlier  === 'Bukan Outlier') OutlierCount['Buyer']++;
         });
   
         return {
-          labels: outliersLabels,
+          labels: OutlierLabels,
           datasets: [{
             label: 'Total Customers by Type Customers',
             data: Object.values(outliersCount),

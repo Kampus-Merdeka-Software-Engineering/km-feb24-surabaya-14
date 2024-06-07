@@ -1,4 +1,3 @@
-const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
 allSideMenu.forEach(item=> {
 	const li = item.parentElement;
@@ -81,32 +80,90 @@ window.addEventListener('resize', function () {
 
 
 // Ditambah Dari sini data CHART 
-
-const doughnut1ctx = document.getElementById('doughnut1').getContext('2d');
-const doughnut1chart = new Chart(doughnut1ctx, {
-  type: 'doughnut',
-  data: {
-	labels: ['Buyer', 'Discount Hunter', 'Royal Buyer'],
-	datasets: [{
-	  label: 'Total Customers by Type Customers',
-	  data: [788, 695, 609],
-	  borderWidth: 1,
-	  backgroundColor: [
-      'rgb(124, 191, 125)',
-      'rgb(34, 110, 30)',
-      'rgb(34, 34, 34)'
-    ],
-	}],
-  },
-  options: {
-	scales: {
-	  y: {
-		beginAtZero: true
-	  }
-	}
+// Fungsi untuk memuat data dari file JSON
+function fetchData(url, callback) {
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log("Data loaded:", data); // Tambahkan log ini
+        callback(data);
+      })
+      .catch(error => console.error('Error loading data:', error));
   }
-});
-
+  
+  // Fungsi untuk memproses data sesuai kebutuhan chart
+  function processData(data, chartType) {
+    console.log("Processing data for chart type:", chartType);
+  
+    switch (chartType) {
+      case 'doughnut1':
+        const OutlierLabels = ['Royal Buyer', 'Buyer', 'Diskon Hunter'];
+        const OutlierColors = ['rgb(124, 191, 125)', 'rgb(34, 110, 30)', 'rgb(34, 34, 34)'];
+        const OutlierCount = OutlierLabels.reduce((acc, label) => {
+          acc[label] = 0;
+          return acc;
+        }, {});
+  
+        data.forEach(item => {
+          if (item.Outlier === 'Outlier Bawah') OutlierCount['Royal Buyer']++;
+          if (item.Outlier  === 'Outlier Atas') OutlierCount['Diskon Hunter']++;
+          if (item.Outlier  === 'Bukan Outlier') OutlierCount['Buyer']++;
+        });
+  
+        return {
+          labels: OutlierLabels,
+          datasets: [{
+            label: 'Total Customers by Type Customers',
+            data: Object.values(OutlierCount),
+            borderWidth: 1,
+            backgroundColor: OutlierColors
+          }]
+        };
+      // Tambahkan case untuk chart lainnya di sini jika diperlukan
+      default:
+        return {};
+    }
+  }
+  
+  // Fungsi untuk menginisialisasi atau memperbarui chart
+  function initializeChart(ctx, chartType, data) {
+    const processedData = processData(data, chartType);
+    console.log("Processed data:", processedData); // Tambahkan log ini
+    return new Chart(ctx, {
+      type: 'doughnut',
+      data: processedData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            enabled: true,
+          },
+        },
+        elements: {
+          arc: {
+            borderWidth: 2,
+            borderColor: '#ffffff', // Tambahkan warna border
+          },
+        },
+      }
+    });
+  }
+  
+  // Contoh penggunaan
+  const doughnut1ctx = document.getElementById('doughnut1').getContext('2d');
+  fetchData('./Superstore.json', data => {
+    initializeChart(doughnut1ctx, 'doughnut1', data);
+  });
+  
 
 const lineCtx = document.getElementById('lineChart').getContext('2d');
 const lineChart = new Chart(lineCtx, {

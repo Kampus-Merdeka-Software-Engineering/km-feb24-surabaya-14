@@ -31,8 +31,8 @@ function fetchData(url, callback) {
         }, {});
   
         data.forEach(item => {
-          if (item.Outlier === 'Outlier Bawah') OutlierCount['Diskon Hunter']++;
-          if (item.Outlier  === 'Outliir ATas') OutlierCount['Royal Buyer']++;
+          if (item.Outlier === 'Outlier Bawah') OutlierCount['Royal Buyer']++;
+          if (item.Outlier  === 'Outlier Atas') OutlierCount['Diskon Hunter']++;
           if (item.Outlier  === 'Bukan Outlier') OutlierCount['Buyer']++;
         });
   
@@ -40,9 +40,9 @@ function fetchData(url, callback) {
           labels: OutlierLabels,
           datasets: [{
             label: 'Total Customers by Type Customers',
-            data: Object.values(outliersCount),
+            data: Object.values(OutlierCount),
             borderWidth: 1,
-            backgroundColor: outliersColors
+            backgroundColor: OutlierColors
           }]
         };
       // Tambahkan case untuk chart lainnya di sini jika diperlukan

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing Page</title>
     <link rel="stylesheet" href="css/Landing_Page.css">
+    <link rel="stylesheet" href="css/swiper-bundle.min.css">
 </head>
 <body>
     <header class="header">
@@ -12,17 +13,17 @@
             <img src="assets/logo_giant.png" alt="Giant">
         </div>
         <nav>
-            <ul class="navbar">
-                <li><a href="team.html">About</a></li>
-                <li><a href="index.html">Dashboard</a></li>
-                <li><a href="tabel.html">Data</a></li>
-                <li><a href="Landing_Page.html">Home</a></li>
-            </ul>
             <div class="burger">
                 <div class="line1"></div>
                 <div class="line2"></div>
                 <div class="line3"></div>
             </div>
+            <ul class="navbar">
+                <li><a href="dashboard_page.html">Dashboard</a></li>
+                <li><a href="tabel.html">Data</a></li>
+                <li><a href="Landing_Page.html">Home</a></li>
+            </ul>
+            
         </nav>
     </header>
     <main>
@@ -106,10 +107,52 @@
                 </div>
             </div>
         </section>
+
+        <section class="member">
+            <div class="slide-container swiper">
+              <div class="slide-content">
+                <div class="card-wrapper swiper-wrapper">
+                  <div class="card swiper-slide">
+                    <div class="image-content">
+                      <span class="overlay"></span>
+                      <div class="card-image">
+                        <img src="assets/BUI.png" alt="" class="card-img">
+                      </div>
+                    </div>
+                    <div class="card-content">
+                      <h2 class="name">Reynhard Powiwi</h2>
+                      <p class="description">Telkom University</p>
+                    </div>
+                  </div>
+                  <div class="card swiper-slide">
+                    <div class="image-content">
+                      <span class="overlay"></span>
+                      <div class="card-image">
+                        <img src="assets/BUI.png" alt="" class="card-img">
+                      </div>
+                    </div>
+                    <div class="card-content">
+                      <h2 class="name">Reynhard Powiwi</h2>
+                      <p class="description">Telkom University</p>
+                    </div>
+                  </div>
+              </div>
+              <!-- Navigation buttons -->
+              <div class="swiper-button-prev"></div>
+              <div class="swiper-button-next"></div>
+          
+              <!-- Pagination -->
+              <div class="swiper-pagination"></div>
+            </div>
+          </section>
+
     </main>
     <footer>
         <p>Hak Cipta <sup>&#169;</sup> 2024.Team 14 Surabaya RevoU.</p>
     </footer>
-    <script src="js/script.js"></script>
+    
+    
 </body>
+<script src="js/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </html>

@@ -15,13 +15,26 @@ allSideMenu.forEach(item=> {
 
 
 // TOGGLE SIDEBAR
-const menuBar = document.querySelector('#content nav .bx.bx-menu');
-const sidebar = document.getElementById('sidebar');
+// const menuBar = document.querySelector('#content nav .bx.bx-menu');
+// const sidebar = document.getElementById('sidebar');
 
-menuBar.addEventListener('click', function () {
-	sidebar.classList.toggle('hide');
-})
+// menuBar.addEventListener('click', function () {
+// 	sidebar.classList.toggle('hide');
+// })
 
+
+document.addEventListener('DOMContentLoaded', () => {
+
+
+    // Toggle Burger Menu
+    const burger = document.querySelector('.burger');
+    const navbar = document.querySelector('.navbar');
+
+    burger.addEventListener('click', () => {
+        navbar.classList.toggle('nav-active');
+        burger.classList.toggle('toggle');
+    });
+});
 
 
 
@@ -42,7 +55,7 @@ searchButton.addEventListener('click', function (e) {
 			searchButtonIcon.classList.replace('bx-x', 'bx-search');
 		}
 	}
-})
+});
 
 
 
@@ -61,7 +74,11 @@ window.addEventListener('resize', function () {
 		searchButtonIcon.classList.replace('bx-x', 'bx-search');
 		searchForm.classList.remove('show');
 	}
-})
+});
+
+ 
+
+
 
 // Ditambah Dari sini data CHART 
 
@@ -385,15 +402,8 @@ switchMode.addEventListener('change', function () {
 	}
 })
 
-document.addEventListener('DOMContentLoaded', () => {
-    const burger = document.querySelector('.burger');
-    const nav = document.querySelector('navbar');
 
-    burger.addEventListener('click', () => {
-    nav.classList.toggle('nav-active');
-    burger.classList.toggle('toggle');
-    });
-})
+
 
 $(document).ready(function() {
     $.getJSON('Superstore.json', function(Superstore) {
@@ -425,3 +435,20 @@ $(document).ready(function() {
     });
 });
 
+
+
+var swiper = new Swiper(".swiper", {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    slidesPerGroup: 3,
+    loop: true,
+    loopFillGroupWithBlank: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });

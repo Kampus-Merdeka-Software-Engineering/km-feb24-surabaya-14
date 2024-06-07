@@ -14,14 +14,27 @@
 </head>
 
 <body>
-
-
 	<!-- NAVBAR -->
-
+	<header class="header">
+        <div class="logo">
+            <img src="assets/logo_giant.png" alt="Giant">
+        </div>
+        <nav>
+            <ul class="navbar">
+                <li><a href="team.html">About</a></li>
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="tabel.html">Data</a></li>
+                <li><a href="Landing_Page.html">Home</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
 	<!-- NAVBAR -->
-
-
-
+	 
 	<!-- CONTENT -->
 	<section id="content">
 		<!-- MAIN -->
@@ -143,16 +156,19 @@
 				<div><canvas id="profitbySegmentChart"></canvas></div>
 			</div>
 			<!-- SAMPAI SINI (CHART) -->
-			<Footer>
-				<p>Hak Cipta © 2024.Team 14 Surabaya RevoU.</p>
-			</Footer>
 		</main>
 		<!-- MAIN -->
+		 <!-- FOOTER -->
+		 <Footer>
+			<p>Hak Cipta © 2024.Team 14 Surabaya RevoU.</p>
+		</Footer>
+		<!-- FOOTER -->
 
 	</section>
 	<!-- CONTENT -->
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 	<script src="js\script.js"></script>
 </body>
 

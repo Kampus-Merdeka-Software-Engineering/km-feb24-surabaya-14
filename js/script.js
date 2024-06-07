@@ -104,7 +104,7 @@ function fetchData(url, callback) {
     switch (chartType) {
       case 'doughnut1':
         const OutlierLabels = ['Royal Buyer', 'Buyer', 'Diskon Hunter'];
-        const OutlierColors = ['rgb(124, 191, 125)', 'rgb(34, 110, 30)', 'rgb(34, 34, 34)'];
+        const OutlierColors = ['rgb(34, 110, 30)', 'rgb(124, 191, 125)', 'rgb(34, 34, 34)'];
         const OutlierCount = OutlierLabels.reduce((acc, label) => {
           acc[label] = 0;
           return acc;
@@ -148,51 +148,90 @@ function fetchData(url, callback) {
           tooltip: {
             enabled: true,
           },
+          datalabels: {
+            color: 'rgb(237, 237, 237)', // Warna angka yang ditampilkan
+            formatter: (value, context) => {
+              const total = context.chart.data.datasets[0].data.reduce((sum, current) => sum + current, 0);
+              const percentage = (value / total * 100).toFixed(1);
+              return percentage + '%';
+            }
+          },
         },
         elements: {
           arc: {
             borderWidth: 2,
-            borderColor: '#ffffff', // Tambahkan warna border
+            borderColor: 'rgb(237, 237, 237)', // Tambahkan warna border
           },
         },
-      }
+      },
+      plugins: [ChartDataLabels],
     });
   }
-  
-  // Contoh penggunaan
-  const doughnut1ctx = document.getElementById('doughnut1').getContext('2d');
-  fetchData('./Superstore.json', data => {
-    initializeChart(doughnut1ctx, 'doughnut1', data);
-  });
-  
 
+   // Fungsi untuk memproses data untuk line chart
+  function processLineData(data) {
+    const quarters = ['K1,2014', 'K2, 2014', 'K3, 2014', 'K4, 2014', 'K1, 2015', 'K2, 2015', 'K3, 2015', 'K4, 2015', 'K1, 2016', 'K2, 2016', 'K3, 2016', 'K4, 2016', 'K1, 2017', 'K2, 2017', 'K3, 2017', 'K4, 2017'];
+    const salesData = {
+        'Royal Buyer': new Array(quarters.length).fill(0),
+        'Buyer': new Array(quarters.length).fill(0),
+        'Diskon Hunter': new Array(quarters.length).fill(0)
+    };
+
+    data.forEach(item => {
+        const orderDate = new Date(item['Order Date']);
+        const quarter = `K${Math.floor(orderDate.getMonth() / 3) + 1}, ${orderDate.getFullYear()}`;
+        const quarterIndex = quarters.indexOf(quarter);
+        const sales = parseFloat(item.Sales.replace(/[$,]/g, ''));
+        
+        if (quarterIndex !== -1) {
+            if (item.Outlier === 'Outlier Bawah') salesData['Royal Buyer'][quarterIndex] += sales;
+            if (item.Outlier === 'Outlier Atas') salesData['Diskon Hunter'][quarterIndex] += sales;
+            if (item.Outlier === 'Bukan Outlier') salesData['Buyer'][quarterIndex] += sales;
+        }
+    });
+
+    return {
+        labels: quarters,
+        datasets: [
+            {
+                label: 'Royal Buyer',
+                backgroundColor: 'rgb(34, 110, 30)',
+                borderColor: 'rgb(34, 110, 30, 1)',
+                data: salesData['Royal Buyer']
+            },
+            {
+                label: 'Buyer',
+                backgroundColor: 'rgb(124, 191, 125)',
+                borderColor: 'rgb(124, 191, 125)',
+                data: salesData['Buyer']
+            },
+            {
+                label: 'Diskon Hunter',
+                backgroundColor: 'rgb(34, 34, 34)',
+                borderColor: 'rgb(34, 34, 34, 1)',
+                data: salesData['Diskon Hunter']
+            }
+        ]
+    };
+}
+
+// Contoh penggunaan
+const doughnut1ctx = document.getElementById('doughnut1').getContext('2d');
 const lineCtx = document.getElementById('lineChart').getContext('2d');
-const lineChart = new Chart(lineCtx, {
-    type: 'line',
-    data: {
-        labels: ['K1,2014', 'K2, 2014', 'K3, 2014', 'K4, 2014', 'K1, 2015', 'K2, 2015', 'K3, 2015', 'K4, 2015', 'K1, 2016', 'K2, 2016', 'K3, 2016', 'K4, 2016', 'K1, 2017', 'K2, 2017', 'K3, 2017', 'K4, 2017'],
-        datasets: [{
-            label: 'Royal Buyer',
-            backgroundColor: 'rgb(34, 110, 30)',
-            borderColor: 'rgb(34, 110, 30, 1)',
-            data: [81988989, 80083122, 86601961, 73532886, 59845573, 53687387, 56905252, 37562782, 115512690, 127033339, 81220828, 100739376, 173770316, 76615459, 117363898, 95512161]
-        },
-		{label: 'Buyer',
-            backgroundColor: 'rgb(124, 191, 125)',
-            borderColor: 'rgb(124, 191, 125)',
-            data: [42146534.29, 38960471.66, 43434069.03, 45398879.46, 37701435.21, 35439018.55, 43338250.74, 48893304.37, 54569253.6, 50006688.33, 47182921.75, 53851244.23, 76299477.29, 49672335.69, 65381652.7, 56555675.31]
-		},
-		{
-			label: 'Diskon',
-            backgroundColor: 'rgb(34, 34, 34)',
-            borderColor: 'rgb(34, 34, 34, 1)',
-            data: [-18816289.62, -11819324.96, -26809504.66, -30759837, -16196171.28, -13311986.47, -32941454.38, -13517143.02, -35345382.36, -19192834.75, -30616512.01, -21702652.05, -44887770.79, -58537857.09, -61042935, -20548990.24]
-		}
-	]
-    },
-    options: {}
-});
+fetchData('./Superstore.json', data => {
+    initializeChart(doughnut1ctx, 'doughnut1', data);
 
+    // Inisialisasi line chart
+    const lineData = processLineData(data);
+    new Chart(lineCtx, {
+        type: 'line',
+        data: lineData,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+});
 const quantityChartCtx = document.getElementById('quantityChart').getContext('2d');
 const quantityChart = new Chart(quantityChartCtx, {
     type: 'bar',

@@ -21,7 +21,7 @@ li {
 	--light: #F9F9F9;
 	--blue: #3C91E6;
 	--light-blue: #CFE8FF;
-	--grey: #eee;
+	--grey: rgb(237, 237, 237);
 	--dark-grey: #AAAAAA;
 	--dark: #342E37;
 	--red: #DB504A;
@@ -50,13 +50,58 @@ body {
 	overflow-x: hidden;
 }
 
+/* NAVBAR */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: var(--dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 1.5em;
+    margin: 0.5em;
+    font-family: var(--lato);
+    animation: fadeInFromLeft 1.5s ease-in-out;
+}
 
+header .logo {
+    height: auto;
+}
 
+.logo img {
+    width: 50%;
+    max-width: 150px; /* Atur max-width agar logo tidak terlalu besar */
+    height: auto; /* Pastikan tinggi otomatis mengikuti lebar untuk menjaga aspek rasio */
+}
 
+.navbar {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+    margin: 0;
+    padding-right: 0.4em;
+    transition: all 0.5s ease;
+}
 
-/* SIDEBAR */
+nav ul.navbar li a {
+    text-decoration: none;
+    color: var(--grey);
+    font-weight: bold;
+}
 
-/* SIDEBAR */
+.burger {
+    display: none;
+    cursor: pointer;
+}
+
+.burger div {
+    width: 25px;
+    height: 3px;
+    background-color: var(--grey);
+    margin: 5px;
+    transition: all 0.3s ease;
+}
+/* NAVBAR */
 
 
 
@@ -70,23 +115,11 @@ body {
 	width: 100%;
 }
 
-
-
-
-/* NAVBAR */
-/* NAVBAR */
-
-
-
-
-
 /* MAIN */
 #content main {
 	width: 100%;
 	padding: 36px 24px;
 	font-family: var(--poppins);
-	max-height: calc(100vh - 56px);
-	overflow-y: auto;
 }
 #content main .head-title {
 	display: flex;
@@ -263,6 +296,7 @@ body {
     background: var(--dark);
     text-align: center;
     font-family: var(--lato);
+	position: fixed;
     bottom: 0;
     padding-top: 10px;
     margin-top: 10px;

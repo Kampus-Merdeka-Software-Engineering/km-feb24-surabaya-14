@@ -2,7 +2,6 @@
 
 // Ditambah Dari sini data CHART 
 // Fungsi untuk memuat data dari file JSON
-// Fungsi untuk memuat data dari file JSON
 function fetchData(url, callback) {
     fetch(url)
       .then(response => {
@@ -24,26 +23,26 @@ function fetchData(url, callback) {
   
     switch (chartType) {
       case 'doughnut1':
-        const segmentLabels = ['Royal Buyer', 'Buyer', 'Discount Hunter'];
-        const segmentColors = ['rgb(124, 191, 125)', 'rgb(34, 110, 30)', 'rgb(34, 34, 34)'];
-        const segmentCount = segmentLabels.reduce((acc, label) => {
+        const outliersLabels = ['Royal Buyer', 'Buyer', 'Diskon Hunter'];
+        const outliersColors = ['rgb(124, 191, 125)', 'rgb(34, 110, 30)', 'rgb(34, 34, 34)'];
+        const outliersCount = outliersLabels.reduce((acc, label) => {
           acc[label] = 0;
           return acc;
         }, {});
   
         data.forEach(item => {
-          if (item.Segment === 'Outlier Bawah') segmentCount['Discount Hunter']++;
-          if (item.Segment === 'Outliir ATas') segmentCount['Royal Buyer']++;
-          if (item.Segment === 'Bukan Outlier') segmentCount['Buyer']++;
+          if (item.Is Outlier === 'Outlier Bawah') outliersCount['Diskon Hunter']++;
+          if (item.Is Outlier  === 'Outliir ATas') outliersCount['Royal Buyer']++;
+          if (item.Is Outlier  === 'Bukan Outlier') outliersCount['Buyer']++;
         });
   
         return {
-          labels: segmentLabels,
+          labels: outliersLabels,
           datasets: [{
             label: 'Total Customers by Type Customers',
-            data: Object.values(segmentCount),
+            data: Object.values(outliersCount),
             borderWidth: 1,
-            backgroundColor: segmentColors
+            backgroundColor: outliersColors
           }]
         };
       // Tambahkan case untuk chart lainnya di sini jika diperlukan

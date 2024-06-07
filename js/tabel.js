@@ -1,6 +1,6 @@
 $(document).ready(function() {
     console.log('test');
-    $.getJSON('Superstore.json', function(Superstore) {
+    $.getJSON('./Superstore.json', function(Superstore) {
         $('#dataTable2').DataTable({
             data: Superstore,
             columns: [
@@ -16,7 +16,8 @@ $(document).ready(function() {
                 { data: 'Sales' },
                 { data: 'Quantity' },
                 { data: 'Discount' },
-                { data: 'Profit' }
+                { data: 'Profit' },
+                { data: 'Outlier'}
             ],
             pageLength: 10,
             dom: 'Bfrtip',

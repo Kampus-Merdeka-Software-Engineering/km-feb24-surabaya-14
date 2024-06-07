@@ -55,7 +55,7 @@ header {
     border-radius: 1.5em;
     margin: 0.5em;
     font-family: var(--lato);
-    animation: fadeInFromLeft 1.5s ease-in-out;
+    /* animation: fadeInFromLeft 1.5s ease-in-out; */
 }
 
 header .logo {
@@ -68,6 +68,7 @@ header .logo {
     height: auto; /* Pastikan tinggi otomatis mengikuti lebar untuk menjaga aspek rasio */
 }
 
+/* Navigation Bar */
 .navbar {
     list-style: none;
     display: flex;
@@ -219,6 +220,103 @@ footer {
     text-align: center;
 }
 
+/* Member */
+.member{
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #EFEFEF;
+}
+
+.slide-container{
+    max-width: 1120px;
+    width: 100%;
+    background-color: var(--grey);
+    padding: 40px 0;
+}
+
+.slide-content{
+    margin: 0 40px;
+}
+
+.card {
+    width: 320px;
+    border-radius: 25px;
+    background-color: #FFF;
+}
+
+.image-content, 
+.card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+}
+
+.image-content{
+    position: relative;
+    row-gap: 5px;
+    
+}
+
+.overlay{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: green;
+    border-radius : 25px 25px 0 25px;
+}
+
+.overlay::before,
+.overlay::after{
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+    height: 40px;
+    width: 40px;
+    background-color: green;
+}
+
+.overlay::after{
+    border-radius: 0 25px 0 0;
+    background-color: #FFF;
+}
+
+.card-image{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background: #FFF;
+    padding: 3px;
+}
+
+.card-image .card-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid green;
+
+}
+
+.name{
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    font-family: var(--poppins);
+}
+
+.description{
+    font-family: var(--poppins);
+    color: #707070;
+    text-align: center;
+}
+
 /* Media Queries untuk Responsive Design */
 
 @media (max-width: 1200px) {
@@ -257,15 +355,24 @@ footer {
     .cycle {
         flex-direction: column;
     }
+
+    .definition p{
+        font-size: small;
+        padding: 2%;
+    }
+    
+    .card {
+
+    }
 }
 
 @media (max-width: 768px) {
     .navbar {
         display: none;
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
-        position: absolute;
-        top: 60px;
+        /* position: absolute; */
+        top: 0px;
         left: 0;
         background-color: var(--dark);
         opacity: 0;
@@ -277,10 +384,11 @@ footer {
         display: block;
     }
 
-    nav ul.navbar.nav-active {
+    .navbar.nav-active {
         display: flex;
         opacity: 1;
         visibility: visible;
+        padding-left: 5%;
     }
 
     .burger.toggle .line1 {

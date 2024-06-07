@@ -113,7 +113,7 @@ table.dataTable {
 }
 
 table.dataTable thead th {
-    background-color: #007BFF;
+    background-color: green;
     color: white;
     padding: 10px;
     text-align: left;
@@ -164,7 +164,7 @@ table.dataTable tbody td {
 }
 
 .dataTables_wrapper .dataTables_filter input:focus {
-    border-color: #007BFF; /* Mengubah warna border saat input difokuskan */
+    border-color: green; /* Mengubah warna border saat input difokuskan */
 }
 
 .dataTables_wrapper .dataTables_filter label {
@@ -191,16 +191,16 @@ table.dataTable tbody td {
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     padding: 5px 10px;
     margin: 0 2px;
-    border: 1px solid #007BFF;
-    background-color: #007BFF;
+    border: 1px solid green;
+    background-color: green;
     color: white;
     text-decoration: none;
     border-radius: 4px;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-    background-color: #0056b3;
-    border: 1px solid #0056b3;
+    background-color: green;
+    border: 1px solid green;
 }
 
 footer {

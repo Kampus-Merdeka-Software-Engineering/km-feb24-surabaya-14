@@ -27,8 +27,8 @@ function fetchData(url, callback) {
         }, {});
   
         data.forEach(item => {
-          if (item.Outlier === 'Outlier Bawah') OutlierCount['Royal Buyer']++;
-          if (item.Outlier  === 'Outlier Atas') OutlierCount['Diskon Hunter']++;
+          if (item.Outlier === 'Outlier Bawah') OutlierCount['Diskon Hunter']++;
+          if (item.Outlier  === 'Outlier Atas') OutlierCount['Royal Buyer']++;
           if (item.Outlier  === 'Bukan Outlier') OutlierCount['Buyer']++;
         });
   
@@ -56,7 +56,7 @@ function fetchData(url, callback) {
       data: processedData,
       options: {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: true,
         plugins: {
           legend: {
             position: 'top',
@@ -86,55 +86,241 @@ function fetchData(url, callback) {
 
    // Fungsi untuk memproses data untuk line chart
   function processLineData(data) {
-    const quarters = ['K1,2014', 'K2, 2014', 'K3, 2014', 'K4, 2014', 'K1, 2015', 'K2, 2015', 'K3, 2015', 'K4, 2015', 'K1, 2016', 'K2, 2016', 'K3, 2016', 'K4, 2016', 'K1, 2017', 'K2, 2017', 'K3, 2017', 'K4, 2017'];
-    const salesData = {
-        'Royal Buyer': new Array(quarters.length).fill(0),
-        'Buyer': new Array(quarters.length).fill(0),
-        'Diskon Hunter': new Array(quarters.length).fill(0)
+    const years = ['2014', '2015', '2016', '2017'];
+    const profitData = {
+        'Royal Buyer': new Array(years.length).fill(0),
+        'Buyer': new Array(years.length).fill(0),
+        'Diskon Hunter': new Array(years.length).fill(0)
     };
 
+    //buatkan saya menhitung data berdasarkan tahun saja
+    
     data.forEach(item => {
         const orderDate = new Date(item['Order Date']);
-        const quarter = `K${Math.floor(orderDate.getMonth() / 3) + 1}, ${orderDate.getFullYear()}`;
-        const quarterIndex = quarters.indexOf(quarter);
-        const sales = parseFloat(item.Sales.replace(/[$,]/g, ''));
+        const year = orderDate.getFullYear().toString();
+        const yearIndex = years.indexOf(year);
+        const profit = parseFloat(item.Profit.replace(/[$,]/g, ''));
         
-        if (quarterIndex !== -1) {
-            if (item.Outlier === 'Outlier Bawah') salesData['Royal Buyer'][quarterIndex] += sales;
-            if (item.Outlier === 'Outlier Atas') salesData['Diskon Hunter'][quarterIndex] += sales;
-            if (item.Outlier === 'Bukan Outlier') salesData['Buyer'][quarterIndex] += sales;
+        if (yearIndex !== -1) {
+            if (item.Outlier === 'Outlier Bawah') profitData['Diskon Hunter'][yearIndex] += profit;
+            if (item.Outlier === 'Outlier Atas') profitData['Royal Buyer'][yearIndex] += profit;
+            if (item.Outlier === 'Bukan Outlier') profitData['Buyer'][yearIndex] += profit;
         }
     });
 
     return {
-        labels: quarters,
+        labels: years,
         datasets: [
             {
                 label: 'Royal Buyer',
                 backgroundColor: 'rgb(34, 110, 30)',
                 borderColor: 'rgb(34, 110, 30, 1)',
-                data: salesData['Royal Buyer']
+                data: profitData['Royal Buyer'],
+                fill: false
             },
             {
                 label: 'Buyer',
                 backgroundColor: 'rgb(124, 191, 125)',
                 borderColor: 'rgb(124, 191, 125)',
-                data: salesData['Buyer']
+                data: profitData['Buyer'],
+                fill: false
             },
             {
                 label: 'Diskon Hunter',
                 backgroundColor: 'rgb(34, 34, 34)',
                 borderColor: 'rgb(34, 34, 34, 1)',
-                data: salesData['Diskon Hunter']
+                data: profitData['Diskon Hunter'],
+                fill: false
             }
         ]
+    };
+}
+
+function processBarData(data) {
+    const categoryLabels = ['Office Supplies', 'Furniture', 'Technology'];
+    const quantityData = {
+        'Buyer': [0, 0, 0],
+        'Discount Hunter': [0, 0, 0],
+        'Royal Buyer': [0, 0, 0]
+    };
+
+    data.forEach(item => {
+        const categoryIndex = categoryLabels.indexOf(item.Category);
+        if (categoryIndex !== -1) {
+            if (item.Outlier === 'Outlier Bawah') quantityData['Discount Hunter'][categoryIndex] += item.Quantity;
+            if (item.Outlier === 'Outlier Atas') quantityData['Royal Buyer'][categoryIndex] += item.Quantity;
+            if (item.Outlier === 'Bukan Outlier') quantityData['Buyer'][categoryIndex] += item.Quantity;
+        }
+    });
+
+    return {
+        labels: categoryLabels,
+        datasets: [
+            {
+                label: 'Buyer',
+                backgroundColor: 'rgb(124, 191, 125)',
+                data: quantityData['Buyer']
+            },
+            {
+                label: 'Discount Hunter',
+                backgroundColor: 'rgba(34, 110, 30)',
+                data: quantityData['Discount Hunter']
+            },
+            {
+                label: 'Royal Buyer',
+                backgroundColor: 'rgb(34, 34, 34)',
+                data: quantityData['Royal Buyer']
+            }
+        ]
+    };
+}
+
+function processBestSellerData(data) {
+    const subCategorySales = {};
+    data.forEach(item => {
+        const subCategoryName = item['Sub-Category'];
+        const sales = parseFloat(item.Sales.replace(/[$,]/g, ''));
+        if (!subCategorySales[subCategoryName]) {
+            subCategorySales[subCategoryName] = 0;
+        }
+        subCategorySales[subCategoryName] += sales;
+    });
+
+    const topSubCategories = Object.keys(subCategorySales)
+        .map(subCategory => ({ subCategory, sales: subCategorySales[subCategory] }))
+        .sort((a, b) => b.sales - a.sales)
+        .slice(0, 5);
+
+    return {
+        labels: topSubCategories.map(item => item.subCategory),
+        datasets: [{
+            label: 'Sales',
+            backgroundColor: 'rgb(124, 191, 125)',
+            data: topSubCategories.map(item => item.sales),
+            borderWidth: 1
+        }]
+    };
+}
+
+function processBestProfitData(data) {
+    const cityProfit = {};
+    data.forEach(item => {
+        const cityName = item.City;
+        const profit = parseFloat(item.Profit.replace(/[$,]/g, ''));
+        if (!cityProfit[cityName]) {
+            cityProfit[cityName] = 0;
+        }
+        cityProfit[cityName] += profit;
+    });
+
+    const topCities = Object.keys(cityProfit)
+        .map(city => ({ city, profit: cityProfit[city] }))
+        .sort((a, b) => b.profit - a.profit)
+        .slice(0, 5);
+
+    return {
+        labels: topCities.map(item => item.city),
+        datasets: [{
+            label: 'Profit',
+            backgroundColor: 'rgb(124, 191, 125)',
+            data: topCities.map(item => item.profit),
+            borderWidth: 1
+        }]
+    };
+}
+
+function processCustomerRegionData(data) {
+    const regions = ['West', 'East', 'Central', 'South'];
+    const customerData = {
+        'Buyer': new Array(regions.length).fill(0),
+        'Discount Hunter': new Array(regions.length).fill(0),
+        'Royal Buyer': new Array(regions.length).fill(0)
+    };
+
+    // Menggunakan objek untuk memastikan pelanggan unik berdasarkan ID
+    const uniqueCustomers = {};
+
+    data.forEach(item => {
+        const region = item.Region;
+        const customerId = item['Customer ID'];
+        const outlier = item.Outlier;
+
+        if (!uniqueCustomers[customerId]) {
+            uniqueCustomers[customerId] = { region: region, outlier: outlier };
+        }
+    });
+
+    // Menghitung jumlah pelanggan unik berdasarkan region dan tipe pelanggan
+    Object.values(uniqueCustomers).forEach(customer => {
+        const regionIndex = regions.indexOf(customer.region);
+        if (regionIndex !== -1) {
+            if (customer.outlier === 'Outlier Bawah') customerData['Discount Hunter'][regionIndex]++;
+            if (customer.outlier === 'Outlier Atas') customerData['Royal Buyer'][regionIndex]++;
+            if (customer.outlier === 'Bukan Outlier') customerData['Buyer'][regionIndex]++;
+        }
+    });
+
+    return {
+        labels: regions,
+        datasets: [
+            {
+                label: 'Buyer',
+                backgroundColor: 'rgb(124, 191, 125)',
+                data: customerData['Buyer']
+            },
+            {
+                label: 'Discount Hunter',
+                backgroundColor: 'rgba(34, 34, 34)',
+                data: customerData['Discount Hunter']
+            },
+            {
+                label: 'Royal Buyer',
+                backgroundColor: 'rgb(34, 110, 30)',
+                data: customerData['Royal Buyer']
+            }
+        ]
+    };
+}
+
+function processBestSellerCityData(data) {
+    const citySales = {};
+
+    data.forEach(item => {
+        const cityName = item.City;
+        const sales = parseFloat(item.Sales.replace(/[$,]/g, ''));
+        if (!citySales[cityName]) {
+            citySales[cityName] = 0;
+        }
+        citySales[cityName] += sales;
+    });
+
+    const topCities = Object.keys(citySales)
+        .map(city => ({ city, sales: citySales[city] }))
+        .sort((a, b) => b.sales - a.sales)
+        .slice(0, 5);
+
+    return {
+        labels: topCities.map(item => item.city),
+        datasets: [{
+            label: 'Sales',
+            backgroundColor: 'rgb(124, 191, 125)',
+            data: topCities.map(item => item.sales),
+            borderWidth: 1
+        }]
     };
 }
 
 // penggunaan
 const doughnut1ctx = document.getElementById('doughnut1').getContext('2d');
 const lineCtx = document.getElementById('lineChart').getContext('2d');
+const quantityChartCtx = document.getElementById('quantityChart').getContext('2d');
+const bestSellerChartCtx = document.getElementById('bestSellerChart').getContext('2d');
+const bestProfitChartCtx = document.getElementById('bestProfitChart').getContext('2d');
+const customerRegionChartCtx = document.getElementById('customerRegionChart').getContext('2d');
+const bestSellerCityChartCtx = document.getElementById('bestSellerCityChart').getContext('2d');
+
 fetchData('./Superstore.json', data => {
+    // Inisialisasi doughnut chart
     initializeChart(doughnut1ctx, 'doughnut1', data);
 
     // Inisialisasi line chart
@@ -144,154 +330,119 @@ fetchData('./Superstore.json', data => {
         data: lineData,
         options: {
             responsive: true,
-            maintainAspectRatio: false
+            maintainAspectRatio: true,
+            title: {
+                display: true,
+                text: 'Total Profit (year)'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        callback: function(value) { return 'Rp ' + value.toLocaleString(); }
+                    }
+                }]
+            },
+            tooltips: {
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        return 'Rp ' + tooltipItem.yLabel.toLocaleString();
+                    }
+                }
+            }
         }
     });
-});
 
-const quantityChartCtx = document.getElementById('quantityChart').getContext('2d');
-const quantityChart = new Chart(quantityChartCtx, {
-    type: 'bar',
-    data: {
-        labels: ['Office Supplies', 'Furniture', 'Technology'],
-        datasets: [
-			{label: 'Buyer',
-				backgroundColor: 'rgb(124, 191, 125)',
-				data: [15431, 4200, 4896]
-			},
-			{
-				label: 'Discount Hunter',
-				backgroundColor: 'rgba(34, 110, 30)',
-				data: [4391, 2872, 1060]
-			},
-            {
-				label: 'Royal Buyer',
-				backgroundColor: 'rgb(34, 34, 34)',
-				data: [3084, 954, 983]
-			}]
-    },
-    options: {
-		indexAxis: 'y',
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-const bestSellerChartCtx = document.getElementById('bestSellerChart').getContext('2d');
-const bestSellerChart = new Chart(bestSellerChartCtx, {
-    type: 'bar',
-    data: {
-        labels: ['Bookcase', 'Chairs', 'Phones', 'Table', 'Binders'],
-        datasets: [
-			{
-				label: 'Sales',
-				backgroundColor: 'rgb(124, 191, 125)',
-				data: [199349619.64, 168189548.99, 144787328.64, 128666146.75, 97257981.27],
-				borderWidth: 1
-			  }]
-    },
-    options: {
-		indexAxis: 'y',
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-const bestProfitChartCtx = document.getElementById('bestProfitChart').getContext('2d');
-const bestProfitChart = new Chart(bestProfitChartCtx, {
-    type: 'bar',
-    data: {
-        labels: ['Paper', 'Binders', 'Phones', 'Storage', 'Furnishings'],
-        datasets: [
-			{
-				label: 'Profit',
-				backgroundColor: 'rgb(124, 191, 125)',
-				data: [738495793.87, 489329791.65, 442118609.11, 433206872.84, 428677331.12],
-				borderWidth: 1
-			  }]
-    },
-    options: {
-		indexAxis: 'y',
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-const customerRegionChartCtx = document.getElementById('customerRegionChart').getContext('2d');
-const customerRegionChart = new Chart(customerRegionChartCtx, {
-    type: 'bar',
-    data: {
-        labels: ['West', 'East', 'Central', 'South'],
-        datasets: [
-			{label: 'Buyer',
-				backgroundColor: 'rgb(124, 191, 125)',
-				data: [646, 605, 499, 450]
-			},
-			{
-				label: 'Discount Hunter',
-				backgroundColor: 'rgba(34, 34, 34)',
-				data: [299, 369, 396, 213]
-			},
-            {
-				label: 'Royal Buyer',
-				backgroundColor: 'rgb(34, 110, 30)',
-				data: [297, 296, 218, 168]
-			}]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
-            }
-        }
-    }
-});
-
-const bestSellerCityChartCtx = document.getElementById('bestSellerCityChart').getContext('2d');
-const bestSellerCityChart = new Chart(bestSellerCityChartCtx, {
-    type: 'bar',
-    data: {
-        labels: ['Houston', 'New York City', 'Los Angeles', 'Philadelphia', 'San Fransisco'],
-        datasets: [
-			{
-				label: 'Sales',
-				backgroundColor: 'rgb(124, 191, 125)',
-				data: [106914599.61, 96552755.52, 91905956.66, 78342678.68, 51660083.64],
-				borderWidth: 1
-			  }]
-    },
-    options: {
-		indexAxis: 'y',
-        scales: {
-            y: {
-                beginAtZero: true,
-                ticks: {
-                    callback: function(value, index, values) {
-                        return '$' + value.toFixed(2);
-                    }
-                }
-            }
-        },
-        plugins: {
-            tooltip: {
-                callbacks: {
-                    label: function(tooltipItem) {
-                        return '$' + tooltipItem.raw.toFixed(2);
-                    }
+    // Inisialisasi bar chart
+    const barData = processBarData(data);
+    new Chart(quantityChartCtx, {
+        type: 'bar',
+        data: barData,
+        options: {
+            indexAxis: 'y',
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
         }
-    }
+    });
+
+    // Inisialisasi best seller chart
+    const bestSellerData = processBestSellerData(data);
+    new Chart(bestSellerChartCtx, {
+        type: 'bar',
+        data: bestSellerData,
+        options: {
+            indexAxis: 'y',
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+    // Inisialisasi best profit chart berdasarkan City
+    const bestProfitData = processBestProfitData(data);
+    new Chart(bestProfitChartCtx, {
+        type: 'bar',
+        data: bestProfitData,
+        options: {
+            indexAxis: 'y',
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+      // Inisialisasi customer region chart
+      const customerRegionData = processCustomerRegionData(data);
+      new Chart(customerRegionChartCtx, {
+          type: 'bar',
+          data: customerRegionData,
+          options: {
+              title: {
+                  display: true,
+                  text: 'Total Customer by Region'
+              },
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+              }
+          }
+      });
+      const bestSellerCityData = processBestSellerCityData(data);
+      new Chart(bestSellerCityChartCtx, {
+          type: 'bar',
+          data: bestSellerCityData,
+          options: {
+              indexAxis: 'y',
+              scales: {
+                  y: {
+                      beginAtZero: true,
+                      ticks: {
+                          callback: function(value) {
+                              return '$' + value.toFixed(2);
+                          }
+                      }
+                  }
+              },
+              plugins: {
+                  tooltip: {
+                      callbacks: {
+                          label: function(tooltipItem) {
+                              return '$' + tooltipItem.raw.toFixed(2);
+                          }
+                      }
+                  }
+              }
+          }
+      });
 });
+
 // TAMBAHAN  
 const topProfitableCityChartCtx = document.getElementById('topProfitableCityChart').getContext('2d');
 const topProfitableCityChart = new Chart(topProfitableCityChartCtx, {

@@ -62,11 +62,6 @@ window.addEventListener('resize', function () {
  
 
 
-
-// Ditambah Dari sini data CHART 
-// Fungsi untuk memuat data dari file JSON
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const burger = document.querySelector('.burger');
     const navbar = document.querySelector('.navbar');

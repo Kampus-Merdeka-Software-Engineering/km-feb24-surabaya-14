@@ -96,7 +96,7 @@ function fetchData(url, callback) {
     //buatkan saya menhitung data berdasarkan tahun saja
     
     data.forEach(item => {
-        const orderDate = new Date(item['Order Date']);
+        const orderDate = new Date(item['Order_Date']);
         const year = orderDate.getFullYear().toString();
         const yearIndex = years.indexOf(year);
         const profit = parseFloat(item.Profit.replace(/[$,]/g, ''));
@@ -242,7 +242,7 @@ function processCustomerRegionData(data) {
 
     data.forEach(item => {
         const region = item.Region;
-        const customerId = item['Customer ID'];
+        const customerId = item['Customer_ID'];
         const outlier = item.Outlier;
 
         if (!uniqueCustomers[customerId]) {

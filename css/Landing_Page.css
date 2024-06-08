@@ -114,7 +114,6 @@ nav ul.navbar li a {
 
 .case {
     position: absolute;
-    right: 5.5rem;
     bottom: 2rem;
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1rem;
@@ -140,9 +139,6 @@ nav ul.navbar li a {
 .explain { 
     padding: 1rem;
     border-radius: 10px;
-    max-width: 90%; /* Radius sudut border */
-    margin-left: 6.6rem;
-    margin-bottom: 2rem;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     animation: fadeInFromBottom 1.5s ease-in-out;
@@ -387,19 +383,12 @@ footer {
 
     .case {
         right: auto;
-        bottom: auto;
-        left: 1rem;
-        top: 1rem;
     }
 
     .definition {
         padding: 1rem;
     }
 
-    .explain {
-        margin-left: 0;
-        margin-right: 0;
-    }
 
     .cycle {
         flex-direction: column;
@@ -458,12 +447,7 @@ footer {
 }
 
 @media (max-width: 500px) {
-    header {
-        padding: 0.5rem;
-        margin: 0;
-    }
-
-    .logo img {
+   .logo img {
         width: 80px;
         max-width: none;
     }
@@ -481,10 +465,7 @@ footer {
     .case {
         padding: 0.5rem;
         font-size: 0.8em;
-        left: 0.5rem;
-        right: 0.5rem;
         top: auto;
-        bottom: auto;
     }
 
     .definition {

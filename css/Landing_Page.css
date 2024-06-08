@@ -88,6 +88,7 @@ nav ul.navbar li a {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    justify-content: space-around;
 }
 
 .burger div {
@@ -97,6 +98,7 @@ nav ul.navbar li a {
     margin: 5px;
     transition: all 0.3s ease;
 }
+
 
 .background {
     position: relative;
@@ -223,45 +225,45 @@ footer {
 
 /* Member */
 .member {
-    min-height: 50vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #EFEFEF;
 }
 
-.slide-container{
+.slide-container {
     max-width: 1120px;
     width: 100%;
     padding: 40px 0;
 }
 
-.slide-content{
+.slide-content {
     margin: 0 40px;
     overflow: hidden;
     border-radius: 25px;
 }
 
-.card{
+.card {
     border-radius: 25px;
     background-color: #FFF;
 }
 
 .image-content,
-.card-content{
+.card-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 10px 14px;
 }
 
-.image-content{
+.image-content {
     position: relative;
     row-gap: 5px;
     padding: 25px 0;
 }
 
-.overlay{
+.overlay {
     position: absolute;
     left: 0;
     top: 0;
@@ -272,7 +274,7 @@ footer {
 }
 
 .overlay::before,
-.overlay::after{
+.overlay::after {
     content: '';
     position: absolute;
     right: 0;
@@ -282,12 +284,12 @@ footer {
     background-color: var(--green);
 }
 
-.overlay::after{
+.overlay::after {
     border-radius: 0 25px 0 0;
     background-color: #FFF;
 }
 
-.card-image{
+.card-image {
     position: relative;
     height: 150px;
     width: 150px;
@@ -296,7 +298,7 @@ footer {
     padding: 3px;
 }
 
-.card-image .card-img{
+.card-image .card-img {
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -304,21 +306,21 @@ footer {
     border: 4px solid var(--green);
 }
 
-.name{
+.name {
     font-size: 18px;
     font-weight: 500;
     color: #333;
     font-family: var(--poppins);
 }
 
-.description{
+.description {
     font-size: 14px;
     color: #707070;
     text-align: center;
     font-family: var(--poppins);
 }
 
-.button{
+.button {
     border: none;
     font-size: 16px;
     color: #FFF;
@@ -331,39 +333,39 @@ footer {
     font-family: var(--poppins);
 }
 
-.button:hover{
+.button:hover {
     background: var(--green);
 }
 
-.swiper-navBtn{
+.swiper-navBtn {
     color: var(--green);
     transition: color 0.3s ease;
 }
 
-.swiper-navBtn:hover{
-    color: var(--green);
+.swiper-navBtn:hover {
+    color: var(--dark-green);
 }
 
 .swiper-navBtn::before,
-.swiper-navBtn::after{
+.swiper-navBtn::after {
     font-size: 35px;
 }
 
-.swiper-button-next{
+.swiper-button-next {
     right: 0;
 }
 
-.swiper-button-prev{
+.swiper-button-prev {
     left: 0;
 }
 
-.swiper-pagination-bullet{
-    background-color:(--green);
+.swiper-pagination-bullet {
+    background-color: var(--green);
     opacity: 1;
 }
 
-.swiper-pagination-bullet-active{
-    background-color: (--green);
+.swiper-pagination-bullet-active {
+    background-color: var(--dark-green);
 }
 
 /* Media Queries untuk Responsive Design */
@@ -414,7 +416,7 @@ footer {
 @media (max-width: 768px) {
     .navbar {
         display: none;
-        flex-direction: column;
+        flex-direction: row;
         width: 100%;
         /* position: absolute; */
         top: 0px;
@@ -430,7 +432,7 @@ footer {
     }
 
     .navbar.nav-active {
-        display: block;
+        display: flex;
         opacity: 1;
         visibility: visible;
         padding-left: 5%;

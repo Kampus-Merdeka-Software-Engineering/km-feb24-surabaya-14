@@ -6,7 +6,8 @@
     <title>Dataset Table</title>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css">
-    <link rel="stylesheet" href="css/tabel.css">
+    <link rel="stylesheet" href="css/tabel1.css">
+    <link rel="stylesheet" href="css/landing_page.css">
 </head>
 <body>
     <header class="header">
@@ -28,32 +29,39 @@
     </header>
     <main>
     <div class="container">
-        <table id="dataTable2" class="display" style="width:100%">
+        <input type="text" id="search" placeholder="Search..."  style="margin-bottom: 20px; padding: 10px; width: 100%;">
+        <table id="Superstore-table">
             <thead>
                 <tr>
-                    <th class="col-order-id">Order_iD</th>
-                    <th class="col-order-date">Order_Date</th>
-                    <th class="col-ship-date">Ship_Date</th>
-                    <th class="col-ship-mode">Ship_Mode</th>
-                    <th class="col-customer-id">Customer_ID</th>
-                    <th class="col-customer-name">Customer_Name</th>
-                    <th class="col-product-id">Product_ID</th>
-                    <th class="col-category">Category</th>
-                    <th class="col-product-name">Product_Name</th>
-                    <th class="col-sales">Sales</th>
-                    <th class="col-quantity">Quantity</th>
-                    <th class="col-discount">Discount</th>
-                    <th class="col-profit">Profit</th>
+                    <th>Order ID</th>
+                    <th>Order Date</th>
+                    <th>Ship Date</th>
+                    <th>Ship Mode</th>
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
+                    <th>Product ID</th>
+                    <th>Category</th>
+                    <th>Sub Category</th>
+                    <th>Product Name</th>
+                    <th>Sales</th>
+                    <th>Quantity</th>
+                    <th>Discount</th>
+                    <th>Profit</th>
+                    <th>Outlier</th>
                 </tr>
             </thead>
+            <tbody></tbody>
         </table>
+        <div id="pagination">
+            <button id="prev" disabled>Previous</button>
+            <span id="page-info"></span>
+            <button id="next">Next</button>
+        </div>
     </div>
     </main>
     <footer>
         <p>Hak Cipta <sup>&#169;</sup> 2024.Team 14 Surabaya RevoU.</p
     </footer>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
     <script src="js/tabel.js"></script>
 </body>
 </html>

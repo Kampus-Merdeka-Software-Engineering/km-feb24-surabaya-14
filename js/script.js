@@ -13,7 +13,7 @@ allSideMenu.forEach(item=> {
 
 
 
-// TOGGLE SIDEBAR
+// // TOGGLE SIDEBAR
 // const menuBar = document.querySelector('#content nav .bx.bx-menu');
 // const sidebar = document.getElementById('sidebar');
 
@@ -23,15 +23,6 @@ allSideMenu.forEach(item=> {
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // // Toggle Sidebar
-    // const menuBar = document.querySelector('#content nav .bx.bx-menu');
-    // const sidebar = document.getElementById('sidebar');
-
-    // menuBar.addEventListener('click', function () {
-    //     sidebar.classList.toggle('hide');
-    // });
-
-    // Toggle Burger Menu
     const burger = document.querySelector('.burger');
     const navbar = document.querySelector('.navbar');
 
@@ -39,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         navbar.classList.toggle('nav-active');
         burger.classList.toggle('toggle');
     });
-});
+})
 
 const searchButton = document.querySelector('#content nav form .form-input button');
 const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');

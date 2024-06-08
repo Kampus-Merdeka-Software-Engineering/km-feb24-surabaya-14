@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('navbar');
 
     burger.addEventListener('click', () => {
-    nav.classList.toggle('nav-active');
-    burger.classList.toggle('toggle');
+        nav.classList.toggle('nav-active');
+        burger.classList.toggle('toggle');
     });
 })

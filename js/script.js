@@ -13,7 +13,7 @@ allSideMenu.forEach(item=> {
 
 
 
-// TOGGLE SIDEBAR
+// // TOGGLE SIDEBAR
 // const menuBar = document.querySelector('#content nav .bx.bx-menu');
 // const sidebar = document.getElementById('sidebar');
 
@@ -22,24 +22,7 @@ allSideMenu.forEach(item=> {
 // })
 
 
-document.addEventListener('DOMContentLoaded', () => {
-    // // Toggle Sidebar
-    // const menuBar = document.querySelector('#content nav .bx.bx-menu');
-    // const sidebar = document.getElementById('sidebar');
 
-    // menuBar.addEventListener('click', function () {
-    //     sidebar.classList.toggle('hide');
-    // });
-
-    // Toggle Burger Menu
-    const burger = document.querySelector('.burger');
-    const navbar = document.querySelector('.navbar');
-
-    burger.addEventListener('click', () => {
-        navbar.classList.toggle('nav-active');
-        burger.classList.toggle('toggle');
-    });
-});
 
 const searchButton = document.querySelector('#content nav form .form-input button');
 const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
@@ -84,20 +67,41 @@ window.addEventListener('resize', function () {
 // Fungsi untuk memuat data dari file JSON
 
 
+document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.querySelector('.burger');
+    const navbar = document.querySelector('.navbar');
 
+    burger.addEventListener('click', () => {
+        navbar.classList.toggle('nav-active');
+        burger.classList.toggle('toggle');
+    });
+})
 
-var swiper = new Swiper(".swiper", {
+var swiper = new Swiper(".slide-content", {
     slidesPerView: 3,
-    spaceBetween: 30,
-    slidesPerGroup: 3,
+    spaceBetween: 25,
     loop: true,
-    loopFillGroupWithBlank: true,
+    centerSlide: 'true',
+    fade: 'true',
+    grabCursor: 'true',
     pagination: {
       el: ".swiper-pagination",
       clickable: true,
+      dynamicBullets: true,
     },
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
+    },
+    breakpoints:{
+        0: {
+            slidesPerView: 1,
+        },
+        520: {
+            slidesPerView: 2,
+        },
+        950: {
+            slidesPerView: 3,
+        },
     },
   });

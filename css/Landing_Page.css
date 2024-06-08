@@ -86,6 +86,7 @@ nav ul.navbar li a {
 
 .burger {
     display: none;
+    flex-direction: column;
     cursor: pointer;
 }
 
@@ -221,7 +222,7 @@ footer {
 }
 
 /* Member */
-.member{
+.member {
     min-height: 50vh;
     display: flex;
     align-items: center;
@@ -232,21 +233,21 @@ footer {
 .slide-container{
     max-width: 1120px;
     width: 100%;
-    background-color: var(--grey);
     padding: 40px 0;
 }
 
 .slide-content{
     margin: 0 40px;
+    overflow: hidden;
+    border-radius: 25px;
 }
 
-.card {
-    width: 320px;
+.card{
     border-radius: 25px;
     background-color: #FFF;
 }
 
-.image-content, 
+.image-content,
 .card-content{
     display: flex;
     flex-direction: column;
@@ -257,7 +258,7 @@ footer {
 .image-content{
     position: relative;
     row-gap: 5px;
-    
+    padding: 25px 0;
 }
 
 .overlay{
@@ -266,8 +267,8 @@ footer {
     top: 0;
     height: 100%;
     width: 100%;
-    background-color: green;
-    border-radius : 25px 25px 0 25px;
+    background-color: var(--green);
+    border-radius: 25px 25px 0 25px;
 }
 
 .overlay::before,
@@ -278,7 +279,7 @@ footer {
     bottom: -40px;
     height: 40px;
     width: 40px;
-    background-color: green;
+    background-color: var(--green);
 }
 
 .overlay::after{
@@ -300,21 +301,69 @@ footer {
     width: 100%;
     object-fit: cover;
     border-radius: 50%;
-    border: 4px solid green;
-
+    border: 4px solid var(--green);
 }
 
 .name{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     color: #333;
     font-family: var(--poppins);
 }
 
 .description{
-    font-family: var(--poppins);
+    font-size: 14px;
     color: #707070;
     text-align: center;
+    font-family: var(--poppins);
+}
+
+.button{
+    border: none;
+    font-size: 16px;
+    color: #FFF;
+    padding: 8px 16px;
+    background-color: var(--light-green);
+    border-radius: 6px;
+    margin: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: var(--poppins);
+}
+
+.button:hover{
+    background: var(--green);
+}
+
+.swiper-navBtn{
+    color: var(--green);
+    transition: color 0.3s ease;
+}
+
+.swiper-navBtn:hover{
+    color: var(--green);
+}
+
+.swiper-navBtn::before,
+.swiper-navBtn::after{
+    font-size: 35px;
+}
+
+.swiper-button-next{
+    right: 0;
+}
+
+.swiper-button-prev{
+    left: 0;
+}
+
+.swiper-pagination-bullet{
+    background-color:(--green);
+    opacity: 1;
+}
+
+.swiper-pagination-bullet-active{
+    background-color: (--green);
 }
 
 /* Media Queries untuk Responsive Design */
@@ -381,7 +430,7 @@ footer {
     }
 
     .navbar.nav-active {
-        display: flex;
+        display: block;
         opacity: 1;
         visibility: visible;
         padding-left: 5%;
@@ -397,6 +446,14 @@ footer {
 
     .burger.toggle .line3 {
         transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .slide-content{
+        margin: 0 10px;
+    }
+    
+    .swiper-navBtn{
+        display: none;
     }
 }
 

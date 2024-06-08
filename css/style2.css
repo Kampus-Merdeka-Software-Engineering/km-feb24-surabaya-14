@@ -319,6 +319,67 @@ footer {
   font-size: 1.31rem;
 }
 
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+table th,
+table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+table th {
+  background-color: var(--green);
+  color: white;
+}
+
+.container_table {
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-block: 25px;
+  margin-inline: 25px;
+}
+
+#pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#pagination button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: 1px solid var(--green);
+  background-color: var(--green);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+#page-info {
+  margin: 0 10px;
+  font-weight: bold;
+}
+
 /* Media Queries untuk Responsive Design */
 
 @media (max-width: 1200px) {
@@ -353,18 +414,6 @@ footer {
   .definition p {
     font-size: small;
     padding: 2%;
-  }
-
-  .member {
-    display: flex;
-    padding: 0 35px;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-  }
-
-  .wrapper .carousel {
-    grid-auto-columns: calc((100% / 2) - 9px);
   }
 }
 
@@ -411,6 +460,109 @@ footer {
 
   .wrapper .carousel {
     grid-auto-columns: 100%;
+  }
+
+  .member {
+    display: flex;
+    padding: 0 35px;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+  }
+
+  .wrapper .carousel {
+    grid-auto-columns: calc((100% / 2) - 9px);
+  }
+
+  .container {
+    width: 95%;
+    padding: 10px;
+    transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  table tr {
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+  }
+
+  table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    white-space: pre-wrap;
+    text-align: left;
+  }
+
+  table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: calc(50% - 12px);
+    padding-right: 10px;
+    white-space: pre-wrap;
+    font-weight: bold;
+  }
+
+  table td:nth-of-type(1):before {
+    content: "Order ID";
+  }
+  table td:nth-of-type(2):before {
+    content: "Order Date";
+  }
+  table td:nth-of-type(3):before {
+    content: "Ship Date";
+  }
+  table td:nth-of-type(4):before {
+    content: "Ship Mode";
+  }
+  table td:nth-of-type(5):before {
+    content: "Customer ID";
+  }
+  table td:nth-of-type(6):before {
+    content: "Customer Name";
+  }
+  table td:nth-of-type(7):before {
+    content: "Product ID";
+  }
+  table td:nth-of-type(8):before {
+    content: "Category";
+  }
+  table td:nth-of-type(8):before {
+    content: "Sub-Category";
+  }
+  table td:nth-of-type(9):before {
+    content: "Product Name";
+  }
+  table td:nth-of-type(10):before {
+    content: "Sales";
+  }
+  table td:nth-of-type(11):before {
+    content: "Quantity";
+  }
+  table td:nth-of-type(12):before {
+    content: "Discount";
+  }
+  table td:nth-of-type(13):before {
+    content: "Profit";
+  }
+  table td:nth-of-type(14):before {
+    content: "Outlier";
   }
 }
 
@@ -459,6 +611,12 @@ footer {
   footer {
     padding: 0.5rem;
     font-size: 0.8em;
+  }
+
+  .container_table {
+    width: 100%;
+    padding: 5px;
+    transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
   }
 }
 

@@ -126,7 +126,7 @@ table th {
     transition: opacity 0.5s ease, visibility 0.5s ease;
   }
 
-  .burger {
+  /* .burger {
     display: block;
   }
 
@@ -146,7 +146,7 @@ table th {
 
   .burger.toggle .line3 {
     transform: rotate(45deg) translate(-5px, -6px);
-  }
+  } */
   .container {
     width: 95%;
     padding: 10px;

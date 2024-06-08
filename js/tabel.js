@@ -1,6 +1,6 @@
 $(document).ready(function() {
     console.log('test');
-    $.getJSON('./Superstore.json', function(Superstore) {
+    $.getJSON('Superstore.json', function(Superstore) {
         $('#dataTable2').DataTable({
             data: Superstore,
             columns: [

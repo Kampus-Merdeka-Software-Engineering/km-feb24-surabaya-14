@@ -1,552 +1,544 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 li {
-	list-style: none;
+  list-style: none;
 }
 
 :root {
-	--poppins: 'Poppins', sans-serif;
-	--lato: 'Lato', sans-serif;
+  --poppins: "Poppins", sans-serif;
+  --lato: "Lato", sans-serif;
 
-	--light: #F9F9F9;
-	--blue: #3C91E6;
-	--light-blue: #CFE8FF;
-	--grey: #eee;
-	--dark-grey: #AAAAAA;
-	--dark: #342E37;
-	--red: #DB504A;
-	--yellow: #FCBA2D;
-	--light-yellow: #FFF2C6;
-	--orange: #FD7238;
-	--light-orange: #FFE0D3;
-    --green : #1F674A;
-    --light-green : #398166;
-
-
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #cfe8ff;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --dark: #342e37;
+  --red: #db504a;
+  --yellow: #fcba2d;
+  --light-yellow: #fff2c6;
+  --orange: #fd7238;
+  --light-orange: #ffe0d3;
+  --green: #1f674a;
+  --light-green: #398166;
 }
 
 html {
-	overflow-x: hidden;
+  overflow-x: hidden;
 }
 
-
 body {
-    background: var(--grey);
-	overflow-x: hidden;
+  background: var(--grey);
+  overflow-x: hidden;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background: var(--dark);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 1.5em;
-    margin: 0.5em;
-    font-family: var(--lato);
-    /* animation: fadeInFromLeft 1.5s ease-in-out; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--dark);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 1.5em;
+  margin: 0.5em;
+  font-family: var(--lato);
+  /* animation: fadeInFromLeft 1.5s ease-in-out; */
 }
 
 header .logo {
-    height: auto;
+  height: auto;
 }
 
 .logo img {
-    width: 50%;
-    max-width: 150px; /* Atur max-width agar logo tidak terlalu besar */
-    height: auto; /* Pastikan tinggi otomatis mengikuti lebar untuk menjaga aspek rasio */
+  width: 50%;
+  max-width: 150px; /* Atur max-width agar logo tidak terlalu besar */
+  height: auto; /* Pastikan tinggi otomatis mengikuti lebar untuk menjaga aspek rasio */
 }
 
 /* Navigation Bar */
 .navbar {
-    list-style: none;
-    display: flex;
-    gap: 3rem;
-    margin: 0;
-    padding-right: 0.4em;
-    /* transition: all 0.5s ease; */
+  list-style: none;
+  display: flex;
+  gap: 3rem;
+  margin: 0;
+  padding-right: 0.4em;
+  /* transition: all 0.5s ease; */
 }
 
 nav ul.navbar li a {
-    text-decoration: none;
-    color: var(--grey);
-    font-weight: bold;
+  text-decoration: none;
+  color: var(--grey);
+  font-weight: bold;
 }
 
 .burger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    justify-content: space-around;
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  justify-content: space-around;
 }
 
 .burger div {
-    width: 25px;
-    height: 3px;
-    background-color: var(--grey);
-    margin: 5px;
-    transition: all 0.3s ease;
+  width: 25px;
+  height: 3px;
+  background-color: var(--grey);
+  margin: 5px;
+  transition: all 0.3s ease;
 }
 
-
 .background {
-    position: relative;
-    background: url('/assets/Giant_Superstore.png') no-repeat center center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    text-align: center;
-    border-radius: 1.5em;
-    margin: 0.5em;
-    padding: 0;
-    animation: complexAnimation 2s ease-in-out;
+  position: relative;
+  background: url("/assets/Giant_Superstore.png") no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
+  border-radius: 1.5em;
+  margin: 0.5em;
+  padding: 0;
+  animation: complexAnimation 2s ease-in-out;
 }
 
 .case {
-    position: absolute;
-    bottom: 2rem;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 1rem;
-    border-radius: 10px;
-    font-family: var(--poppins);
-    color: white;
-    max-width: 90%;
-    animation: fadeInFromTop 2s ease-in-out;
+  position: absolute;
+  bottom: 2rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 10px;
+  font-family: var(--poppins);
+  color: white;
+  max-width: 90%;
+  animation: fadeInFromTop 2s ease-in-out;
 }
-
 
 .definition {
-    padding: 2rem;
-    margin: 0.5em;
-    background-color: #f9f9f9;
-    display: flex;
-    flex-direction: column;
-    border-radius: 1.5em;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    gap: 2rem;
+  padding: 2rem;
+  margin: 0.5em;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.5em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: 2rem;
 }
 
-.explain { 
-    padding: 1rem;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    animation: fadeInFromBottom 1.5s ease-in-out;
+.explain {
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: fadeInFromBottom 1.5s ease-in-out;
 }
 
 .explain h2 {
-    margin-top: 0;
-    text-align: center;
-    font-family: var(--lato);
-    font-weight: bold;
+  margin-top: 0;
+  text-align: center;
+  font-family: var(--lato);
+  font-weight: bold;
 }
 
 .explain p {
-    text-align: center;
-    font-family: var(--poppins);
-    font-size: 1.2em;
+  text-align: center;
+  font-family: var(--poppins);
+  font-size: 1.2em;
 }
 
-.cycle{
-    display: flex;
-    gap: 2rem;
+.cycle {
+  display: flex;
+  gap: 2rem;
 }
-
-
 
 .cards {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-size: 20px;
-    opacity: 0; /* Mulai dengan tidak terlihat */
-    animation: fadeInUp 1s ease-in-out forwards;
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-size: 20px;
+  opacity: 0; /* Mulai dengan tidak terlihat */
+  animation: fadeInUp 1s ease-in-out forwards;
 }
 
 .cards:nth-child(1) {
-    animation-delay: 0.1s; /* Penundaan animasi untuk kartu pertama */
+  animation-delay: 0.1s; /* Penundaan animasi untuk kartu pertama */
 }
 
 .cards:nth-child(2) {
-    animation-delay: 0.3s; /* Penundaan animasi untuk kartu kedua */
+  animation-delay: 0.3s; /* Penundaan animasi untuk kartu kedua */
 }
 
 .cards:nth-child(3) {
-    animation-delay: 0.5s; /* Penundaan animasi untuk kartu ketiga */
+  animation-delay: 0.5s; /* Penundaan animasi untuk kartu ketiga */
 }
 
 /* Tambahkan lebih banyak penundaan animasi untuk kartu tambahan */
 .cards:nth-child(4) {
-    animation-delay: 0.7s;
+  animation-delay: 0.7s;
 }
 
 .cards:nth-child(5) {
-    animation-delay: 0.9s;
+  animation-delay: 0.9s;
 }
 
 .cards span {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .cards p {
-    font-family: var(--poppins);
+  font-family: var(--poppins);
 }
 
 .cards h3 {
-    font-family: var(--lato);
+  font-family: var(--lato);
 }
 
 footer {
-    background-color: #333;
-    color: #fff;
-    padding: 0.5rem;
-    font-family: var(--poppins);
-    text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem;
+  font-family: var(--poppins);
+  text-align: center;
 }
 
 /* Member */
 .member {
-    min-height: 80vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #EFEFEF;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #efefef;
 }
 
 .slide-container {
-    max-width: 1120px;
-    width: 100%;
-    padding: 40px 0;
+  max-width: 1120px;
+  width: 100%;
+  padding: 40px 0;
 }
 
 .slide-content {
-    margin: 0 40px;
-    overflow: hidden;
-    border-radius: 25px;
+  margin: 0 40px;
+  overflow: hidden;
+  border-radius: 25px;
 }
 
 .card {
-    border-radius: 25px;
-    background-color: #FFF;
+  border-radius: 25px;
+  background-color: #fff;
 }
 
 .image-content,
 .card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 14px;
 }
 
 .image-content {
-    position: relative;
-    row-gap: 5px;
-    padding: 25px 0;
+  position: relative;
+  row-gap: 5px;
+  padding: 25px 0;
 }
 
 .overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: var(--green);
-    border-radius: 25px 25px 0 25px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background-color: var(--green);
+  border-radius: 25px 25px 0 25px;
 }
 
 .overlay::before,
 .overlay::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: -40px;
-    height: 40px;
-    width: 40px;
-    background-color: var(--green);
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: -40px;
+  height: 40px;
+  width: 40px;
+  background-color: var(--green);
 }
 
 .overlay::after {
-    border-radius: 0 25px 0 0;
-    background-color: #FFF;
+  border-radius: 0 25px 0 0;
+  background-color: #fff;
 }
 
 .card-image {
-    position: relative;
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    background: #FFF;
-    padding: 3px;
+  position: relative;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 3px;
 }
 
 .card-image .card-img {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid var(--green);
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--green);
 }
 
 .name {
-    font-size: 18px;
-    font-weight: 500;
-    color: #333;
-    font-family: var(--poppins);
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  font-family: var(--poppins);
 }
 
 .description {
-    font-size: 14px;
-    color: #707070;
-    text-align: center;
-    font-family: var(--poppins);
+  font-size: 14px;
+  color: #707070;
+  text-align: center;
+  font-family: var(--poppins);
 }
 
 .button {
-    border: none;
-    font-size: 16px;
-    color: #FFF;
-    padding: 8px 16px;
-    background-color: var(--light-green);
-    border-radius: 6px;
-    margin: 14px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-family: var(--poppins);
+  border: none;
+  font-size: 16px;
+  color: #fff;
+  padding: 8px 16px;
+  background-color: var(--light-green);
+  border-radius: 6px;
+  margin: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: var(--poppins);
 }
 
 .button:hover {
-    background: var(--green);
+  background: var(--green);
 }
 
 .swiper-navBtn {
-    color: var(--green);
-    transition: color 0.3s ease;
+  color: var(--green);
+  transition: color 0.3s ease;
 }
 
 .swiper-navBtn:hover {
-    color: var(--dark-green);
+  color: var(--dark-green);
 }
 
 .swiper-navBtn::before,
 .swiper-navBtn::after {
-    font-size: 35px;
+  font-size: 35px;
 }
 
 .swiper-button-next {
-    right: 0;
+  right: 0;
 }
 
 .swiper-button-prev {
-    left: 0;
+  left: 0;
 }
 
 .swiper-pagination-bullet {
-    background-color: var(--green);
-    opacity: 1;
+  background-color: var(--green);
+  opacity: 1;
 }
 
 .swiper-pagination-bullet-active {
-    background-color: var(--dark-green);
+  background-color: var(--dark-green);
 }
 
 /* Media Queries untuk Responsive Design */
 
 @media (max-width: 1200px) {
-    .logo img {
-        justify-content: center;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .logo img {
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .navbar{
-        flex-direction: row;
-        gap: 1rem;
-    }
+  .navbar {
+    flex-direction: row;
+    gap: 1rem;
+  }
 
-    .background {
-        flex-direction: column;
-        padding: 1rem;
-    }
+  .background {
+    flex-direction: column;
+    padding: 1rem;
+  }
 
-    .case {
-        right: auto;
-    }
+  .case {
+    right: auto;
+  }
 
-    .definition {
-        padding: 1rem;
-    }
+  .definition {
+    padding: 1rem;
+  }
 
+  .cycle {
+    flex-direction: column;
+  }
 
-    .cycle {
-        flex-direction: column;
-    }
-
-    .definition p{
-        font-size: small;
-        padding: 2%;
-    }
+  .definition p {
+    font-size: small;
+    padding: 2%;
+  }
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        display: none;
-        flex-direction: row;
-        width: 100%;
-        /* position: absolute; */
-        top: 0px;
-        left: 0px;
-        background-color: var(--dark);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
+  .navbar {
+    display: none;
+    flex-direction: row;
+    width: 100%;
+    /* position: absolute; */
+    top: 0px;
+    left: 0px;
+    background-color: var(--dark);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
 
-    .burger {
-        display: block;
-    }
+  .burger {
+    display: block;
+  }
 
-    .navbar.nav-active {
-        display: flex;
-        opacity: 1;
-        visibility: visible;
-        padding-left: 5%;
-    }
+  .navbar.nav-active {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    padding-left: 5%;
+  }
 
-    .burger.toggle .line1 {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
+  .burger.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
 
-    .burger.toggle .line2 {
-        opacity: 0;
-    }
+  .burger.toggle .line2 {
+    opacity: 0;
+  }
 
-    .burger.toggle .line3 {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
+  .burger.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
 
-    .slide-content{
-        margin: 0 10px;
-    }
-    
-    .swiper-navBtn{
-        display: none;
-    }
+  .slide-content {
+    margin: 0 10px;
+  }
+
+  .swiper-navBtn {
+    display: none;
+  }
 }
 
 @media (max-width: 500px) {
-   .logo img {
-        width: 80px;
-        max-width: none;
-    }
+  .logo img {
+    width: 80px;
+    max-width: none;
+  }
 
-    .navbar {
-        gap: 0.5rem;
-    }
+  .navbar {
+    gap: 0.5rem;
+  }
 
-    .background {
-        margin: 0;
-        border-radius: 0;
-        background-size: cover;
-    }
+  .background {
+    margin: 0;
+    border-radius: 0;
+    background-size: cover;
+  }
 
-    .case {
-        padding: 0.5rem;
-        font-size: 0.8em;
-        top: auto;
-    }
+  .case {
+    padding: 0.5rem;
+    font-size: 0.8em;
+    top: auto;
+  }
 
-    .definition {
-        padding: 0.5rem;
-        margin: 0;
-    }
+  .definition {
+    padding: 0.5rem;
+    margin: 0;
+  }
 
-    .explain {
-        padding: 0.5rem;
-        margin-left: 0;
-        margin-right: 0;
-    }
+  .explain {
+    padding: 0.5rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
 
-    .cycle {
-        gap: 0.5rem;
-    }
+  .cycle {
+    gap: 0.5rem;
+  }
 
-    .cards {
-        padding: 0.5rem;
-        font-size: 0.8em;
-    }
+  .cards {
+    padding: 0.5rem;
+    font-size: 0.8em;
+  }
 
-    footer {
-        padding: 0.5rem;
-        font-size: 0.8em;
-    }
+  footer {
+    padding: 0.5rem;
+    font-size: 0.8em;
+  }
 }
 
 @keyframes fadeInFromLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-100%); /* Menggeser elemen ke atas */
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0); /* Mengembalikan elemen ke posisi semula */
-    }
+  from {
+    opacity: 0;
+    transform: translateX(-100%); /* Menggeser elemen ke atas */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Mengembalikan elemen ke posisi semula */
+  }
 }
 
 @keyframes fadeInFromTop {
-    from {
-        opacity: 0;
-        transform: translateY(-100%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
 
 @keyframes fadeInFromBottom {
-    from {
-        opacity: 0;
-        transform: translateY(100%);
-    }
-    to {
-        opacity: 1;
-        transform: translate(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
 
 @keyframes complexAnimation {
-    from {
-        opacity: 0;
-        transform: translateX(100%) translateY(20px) scale(0.8); /* Mulai dari kanan, sedikit ke bawah, dan lebih kecil */
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0) translateY(0) scale(1); /* Kembali ke posisi semula, ukuran normal */
-    }
+  from {
+    opacity: 0;
+    transform: translateX(100%) translateY(20px) scale(0.8); /* Mulai dari kanan, sedikit ke bawah, dan lebih kecil */
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) translateY(0) scale(1); /* Kembali ke posisi semula, ukuran normal */
+  }
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(100px); /* Mulai dari bawah */
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0); /* Kembali ke posisi semula */
-    }
+  from {
+    opacity: 0;
+    transform: translateY(100px); /* Mulai dari bawah */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* Kembali ke posisi semula */
+  }
 }

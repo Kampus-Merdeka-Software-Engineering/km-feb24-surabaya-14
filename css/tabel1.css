@@ -1,187 +1,240 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap");
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --poppins: "Poppins", sans-serif;
+  --lato: "Lato", sans-serif;
+
+  --light: #f9f9f9;
+  --blue: #3c91e6;
+  --light-blue: #cfe8ff;
+  --grey: #eee;
+  --dark-grey: #aaaaaa;
+  --dark: #342e37;
+  --red: #db504a;
+  --yellow: #fcba2d;
+  --light-yellow: #fff2c6;
+  --orange: #fd7238;
+  --light-orange: #ffe0d3;
+  --green: #1f674a;
+  --light-green: #398166;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
+  font-family: "Poppins", sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    overflow: hidden;
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-table th, table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+table th,
+table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 table th {
-    background-color: #3C91E6;
-    color: white;
+  background-color: var(--green);
+  color: white;
 }
 
 .container {
-    margin-top: 20px;
-    background: #fff;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    overflow-x: auto;
-    margin-block: 25px;
-    margin-inline: 25px;
+  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-block: 25px;
+  margin-inline: 25px;
 }
 
 #pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 #pagination button {
-    padding: 5px 10px;
-    margin: 0 5px;
-    border: 1px solid #3C91E6;
-    background-color: #3C91E6;
-    color: white;
-    cursor: pointer;
-    border-radius: 4px;
+  padding: 5px 10px;
+  margin: 0 5px;
+  border: 1px solid var(--green);
+  background-color: var(--green);
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 #pagination button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 #page-info {
-    margin: 0 10px;
-    font-weight: bold;
+  margin: 0 10px;
+  font-weight: bold;
 }
 
-
-
 @media (max-width: 1200px) {
-    .logo img {
-        justify-content: center;
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .logo img {
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .navbar{
-        flex-direction: row;
-        gap: 1rem;
-    }
+  .navbar {
+    flex-direction: row;
+    gap: 1rem;
+  }
 }
 
 @media screen and (max-width: 500px) {
-    .container {
-        width: 100%;
-        padding: 5px;
-        transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
-    }
+  .container {
+    width: 100%;
+    padding: 5px;
+    transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
+  }
 }
 
 @media screen and (max-width: 768px) {
-    .navbar {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        position: absolute;
-        top: 60px;
-        left: 0;
-        background-color: var(--dark);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-    }
+  .navbar {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: var(--dark);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+  }
 
-    .burger {
-        display: block;
-    }
+  .burger {
+    display: block;
+  }
 
-    nav ul.navbar.nav-active {
-        display: flex;
-        opacity: 1;
-        visibility: visible;
-    }
+  nav ul.navbar.nav-active {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+  }
 
-    .burger.toggle .line1 {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
+  .burger.toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
 
-    .burger.toggle .line2 {
-        opacity: 0;
-    }
+  .burger.toggle .line2 {
+    opacity: 0;
+  }
 
-    .burger.toggle .line3 {
-        transform: rotate(45deg) translate(-5px, -6px);
-    }
-    .container {
-        width: 95%;
-        padding: 10px;
-        transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
-    }
+  .burger.toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+  .container {
+    width: 95%;
+    padding: 10px;
+    transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
+  }
 
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
 
-    table thead tr {
-        position: absolute;
-        top: -9999px;
-        left: -9999px;
-    }
+  table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
 
-    table tr {
-        border: 1px solid #ccc;
-        margin-bottom: 5px;
-    }
+  table tr {
+    border: 1px solid #ccc;
+    margin-bottom: 5px;
+  }
 
-    table td {
-        border: none;
-        border-bottom: 1px solid #eee;
-        position: relative;
-        padding-left: 50%;
-        white-space: pre-wrap;
-        text-align: left;
-    }
+  table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    white-space: pre-wrap;
+    text-align: left;
+  }
 
-    table td:before {
-        position: absolute;
-        top: 6px;
-        left: 6px;
-        width: calc(50% - 12px);
-        padding-right: 10px;
-        white-space: pre-wrap;
-        font-weight: bold;
-    }
+  table td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: calc(50% - 12px);
+    padding-right: 10px;
+    white-space: pre-wrap;
+    font-weight: bold;
+  }
 
-    table td:nth-of-type(1):before { content: "Order ID"; }
-    table td:nth-of-type(2):before { content: "Order Date"; }
-    table td:nth-of-type(3):before { content: "Ship Date"; }
-    table td:nth-of-type(4):before { content: "Ship Mode"; }
-    table td:nth-of-type(5):before { content: "Customer ID"; }
-    table td:nth-of-type(6):before { content: "Customer Name"; }
-    table td:nth-of-type(7):before { content: "Product ID"; }
-    table td:nth-of-type(8):before { content: "Category"; }
-    table td:nth-of-type(8):before { content: "Sub-Category";}
-    table td:nth-of-type(9):before { content: "Product Name"; }
-    table td:nth-of-type(10):before { content: "Sales"; }
-    table td:nth-of-type(11):before { content: "Quantity"; }
-    table td:nth-of-type(12):before { content: "Discount"; }
-    table td:nth-of-type(13):before { content: "Profit"; }
-    table td:nth-of-type(14):before { content: "Outlier"; }
+  table td:nth-of-type(1):before {
+    content: "Order ID";
+  }
+  table td:nth-of-type(2):before {
+    content: "Order Date";
+  }
+  table td:nth-of-type(3):before {
+    content: "Ship Date";
+  }
+  table td:nth-of-type(4):before {
+    content: "Ship Mode";
+  }
+  table td:nth-of-type(5):before {
+    content: "Customer ID";
+  }
+  table td:nth-of-type(6):before {
+    content: "Customer Name";
+  }
+  table td:nth-of-type(7):before {
+    content: "Product ID";
+  }
+  table td:nth-of-type(8):before {
+    content: "Category";
+  }
+  table td:nth-of-type(8):before {
+    content: "Sub-Category";
+  }
+  table td:nth-of-type(9):before {
+    content: "Product Name";
+  }
+  table td:nth-of-type(10):before {
+    content: "Sales";
+  }
+  table td:nth-of-type(11):before {
+    content: "Quantity";
+  }
+  table td:nth-of-type(12):before {
+    content: "Discount";
+  }
+  table td:nth-of-type(13):before {
+    content: "Profit";
+  }
+  table td:nth-of-type(14):before {
+    content: "Outlier";
+  }
 }

@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Landing Page</title>
-    <link rel="stylesheet" href="css\swiper-bundle.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="css/Landing_Page.css" />
   </head>
   <body>
@@ -151,45 +154,53 @@
       </section>
 
       <section class="member">
-        <div class="slide-container swiper">
-          <div class="slide-content">
-            <div class="card-wrapper swiper-wrapper">
-              <div class="card swiper-slide">
-                <div class="image-content">
-                  <span class="overlay"></span>
-                  <div class="card-image">
-                    <!--<img src="images/profile1.jpg" alt="" class="card-img">-->
-                  </div>
-                </div>
-                <div class="card-content">
-                  <h2 class="name">Reynhard Powiwi</h2>
-                  <p class="description">Telkom University</p>
-                  <button class="button">LinkedIn</button>
-                </div>
+        <div class="wrapper">
+          <i id="left" class="fa-solid fa-angle-left"></i>
+          <ul class="carousel">
+            <li class="card">
+              <div class="img">
+                <img src="assets\BUI.png" alt="img" draggable="false" />
               </div>
-              <div class="card swiper-slide">
-                <div class="image-content">
-                  <span class="overlay"></span>
-                  <div class="card-image">
-                    <!--<img src="images/profile2.jpg" alt="" class="card-img">-->
-                  </div>
-                </div>
-                <div class="card-content">
-                  <h2 class="name">David Dell</h2>
-                  <p class="description">
-                    The lorem text the section that contains header with having
-                    open functionality. Lorem dolor sit amet consectetur
-                    adipisicing elit.
-                  </p>
-                  <button class="button">View More</button>
-                </div>
+              <h2>Blanche Pearson</h2>
+              <span>Sales Manager</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img src="assets\BUI.png" alt="img" draggable="false" />
               </div>
-              <!-- Additional cards can be added here -->
-            </div>
-          </div>
-          <div class="swiper-button-next swiper-navBtn"></div>
-          <div class="swiper-button-prev swiper-navBtn"></div>
-          <div class="swiper-pagination"></div>
+              <h2>Joenas Brauers</h2>
+              <span>Web Developer</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img src="assets\BUI.png" alt="img" draggable="false" />
+              </div>
+              <h2>Lariach French</h2>
+              <span>Online Teacher</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img src="assets\BUI.png" alt="img" draggable="false" />
+              </div>
+              <h2>James Khosravi</h2>
+              <span>Freelancer</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img src="images/img-5.jpg" alt="img" draggable="false" />
+              </div>
+              <h2>Kristina Zasiadko</h2>
+              <span>Bank Manager</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img src="images/img-6.jpg" alt="img" draggable="false" />
+              </div>
+              <h2>Donald Horton</h2>
+              <span>App Designer</span>
+            </li>
+          </ul>
+          <i id="right" class="fa-solid fa-angle-right"></i>
         </div>
       </section>
     </main>
@@ -197,6 +208,5 @@
       <p>Hak Cipta <sup>&#169;</sup> 2024.Team 14 Surabaya RevoU.</p>
     </footer>
   </body>
-  <script src="js\swiper-bundle.min.js"></script>
-  <script src="js\script.js"></script>
+  <script src="js/script.js"></script>
 </html>

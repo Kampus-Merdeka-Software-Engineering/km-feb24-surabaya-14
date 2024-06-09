@@ -6,9 +6,18 @@
 👨‍🏫 Dally Kharisma Muhammad (Data Analyst Mentor)<br>
 👨‍🏫 Andra Adhiatma Nugraha (Software Engineering Mentor)<br>
 <br>**Members :**<br> 
+[active] K. Ayu Diah Permata Sari - [Kampus]<br>
+[active] Haya Q. Luthfiyaningsih - [Kampus]<br>
+[active] Salma Dara Canita - [Kampus]<br>
+[active] Nayla Nur Alifah - [Kampus]<br>
+[active] Angger Tri Prasetyo - [Kampus]<br>
+[active] Alfika Putri Dewinta Seodibjo - [Kampus]<br>
+[active] Katherine Regina Hermawan - [Kampus]<br>
 [active] Reynhard Powiwi - Telkom University<br>
-
-
+[active] Salsabila Yonita - [Kampus]<br>
+[active] Rahmat Hanif Purnama- [Kampus]<br>
+[active] Gusti Ken' O Rama Dewa - [Kampus]<br>
+[active] Tedy Pawer Sihombing - [Kampus]<br>
 
 <br>**Project Description 📋**<br>
 Giant Superstore is a company located in USA, enganged in office equipment and supplies with three categories: furniture, office supply, and technology products.

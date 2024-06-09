@@ -1,322 +1,334 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const API_URL = "./Superstore.json";
-
-  // Fetch data from the provided URL and execute the callback with the data
-  function fetchData(url, callback) {
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(
-            `Network response was not ok: ${response.statusText}`
-          );
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Data loaded:", data);
-        callback(data);
-      })
-      .catch((error) => console.error("Error loading data:", error));
-  }
-
-  // Process data for different chart types
-  function processData(data, chartType) {
-    console.log("Processing data for chart type:", chartType);
-
-    const chartProcessors = {
-      doughnut1: processDoughnutData,
-      line: processLineData,
-      bar: processBarData,
-      bestSeller: processBestSellerData,
-      bestProfit: processBestProfitData,
-      customerRegion: processCustomerRegionData,
-      bestSellerCity: processBestSellerCityData,
-    };
-
-    return chartProcessors[chartType] ? chartProcessors[chartType](data) : {};
-  }
-
-  // Doughnut chart data processing
-  function processDoughnutData(data) {
-    const labels = ["Royal Buyer", "Buyer", "Diskon Hunter"];
-    const colors = [
-      "rgb(34, 110, 30)",
-      "rgb(124, 191, 125)",
-      "rgb(34, 34, 34)",
-    ];
-    const counts = { "Royal Buyer": 0, Buyer: 0, "Diskon Hunter": 0 };
-
-    data.forEach((item) => {
-      if (item.Outlier === "Outlier Bawah") counts["Diskon Hunter"]++;
-      else if (item.Outlier === "Outlier Atas") counts["Royal Buyer"]++;
-      else counts["Buyer"]++;
-    });
-
-    return {
-      labels,
-      datasets: [
-        {
-          label: "Total Customers by Type",
-          data: Object.values(counts),
-          borderWidth: 1,
-          backgroundColor: colors,
-        },
-      ],
-    };
-  }
-
-  // Line chart data processing
-  function processLineData(data) {
-    const years = ["2014", "2015", "2016", "2017"];
-    const profitData = {
-      "Royal Buyer": Array(years.length).fill(0),
-      Buyer: Array(years.length).fill(0),
-      "Diskon Hunter": Array(years.length).fill(0),
-    };
-
-    data.forEach((item) => {
-      const year = new Date(item.Order_Date).getFullYear().toString();
-      const yearIndex = years.indexOf(year);
-      const profit = parseFloat(item.Profit.replace(/[$,]/g, ""));
-
-      if (yearIndex !== -1) {
-        if (item.Outlier === "Outlier Bawah")
-          profitData["Diskon Hunter"][yearIndex] += profit;
-        else if (item.Outlier === "Outlier Atas")
-          profitData["Royal Buyer"][yearIndex] += profit;
-        else profitData["Buyer"][yearIndex] += profit;
+function fetchData(url, callback) {
+  fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
       }
-    });
+      return response.json();
+    })
+    .then((data) => {
+      console.log("Data loaded:", data);
+      callback(data);
+    })
+    .catch((error) => console.error("Error loading data:", error));
+}
 
-    return {
-      labels: years,
-      datasets: [
-        {
-          label: "Royal Buyer",
-          backgroundColor: "rgb(34, 110, 30)",
-          borderColor: "rgb(34, 110, 30)",
-          data: profitData["Royal Buyer"],
-          fill: false,
-        },
-        {
-          label: "Buyer",
-          backgroundColor: "rgb(124, 191, 125)",
-          borderColor: "rgb(124, 191, 125)",
-          data: profitData["Buyer"],
-          fill: false,
-        },
-        {
-          label: "Diskon Hunter",
-          backgroundColor: "rgb(34, 34, 34)",
-          borderColor: "rgb(34, 34, 34)",
-          data: profitData["Diskon Hunter"],
-          fill: false,
-        },
-      ],
-    };
+function processDoughnut1Data(data) {
+  const labels = ["Royal Buyer", "Buyer", "Diskon Hunter"];
+  const count = { "Royal Buyer": 0, Buyer: 0, "Diskon Hunter": 0 };
+
+  data.forEach((item) => {
+    if (item.Outlier === "Outlier Bawah") count["Diskon Hunter"]++;
+    if (item.Outlier === "Outlier Atas") count["Royal Buyer"]++;
+    if (item.Outlier === "Bukan Outlier") count["Buyer"]++;
+  });
+
+  return { labels, data: Object.values(count) };
+}
+
+function processDoughnut2Data(data) {
+  const labels = ["Consumer", "Corporate", "Home Office"];
+  const count = { Consumer: 0, Corporate: 0, "Home Office": 0 };
+
+  const uniqueOrderIDs = new Set(data.map((d) => d["Order ID"]));
+  uniqueOrderIDs.forEach((orderID) => {
+    const orderItems = data.filter((d) => d["Order ID"] === orderID);
+    count[orderItems[0].Segment]++;
+  });
+
+  return { labels, data: Object.values(count) };
+}
+
+function processSalesBySegmentData(data) {
+  const labels = ["Consumer", "Corporate", "Home Office"];
+  const count = { Consumer: 0, Corporate: 0, "Home Office": 0 };
+
+  data.forEach((item) => {
+    const sales = parseFloat(item.Sales.replace(/[$,]/g, ""));
+    count[item.Segment] += sales;
+  });
+
+  return { labels, data: Object.values(count) };
+}
+
+function processProfitBySegmentData(data) {
+  const labels = ["Consumer", "Corporate", "Home Office"];
+  const count = { Consumer: 0, Corporate: 0, "Home Office": 0 };
+
+  data.forEach((item) => {
+    const profit = parseFloat(item.Profit.replace(/[$,]/g, ""));
+    count[item.Segment] += profit;
+  });
+
+  return { labels, data: Object.values(count) };
+}
+
+function processLineData(data) {
+  const years = ["2014", "2015", "2016", "2017"];
+  const profitData = {
+    "Royal Buyer": new Array(years.length).fill(0),
+    Buyer: new Array(years.length).fill(0),
+    "Diskon Hunter": new Array(years.length).fill(0),
+  };
+
+  data.forEach((item) => {
+    const orderDate = new Date(item["Order_Date"]);
+    const year = orderDate.getFullYear().toString();
+    const yearIndex = years.indexOf(year);
+    const profit = parseFloat(item.Profit.replace(/[$,]/g, ""));
+
+    if (yearIndex !== -1) {
+      if (item.Outlier === "Outlier Bawah")
+        profitData["Diskon Hunter"][yearIndex] += profit;
+      if (item.Outlier === "Outlier Atas")
+        profitData["Royal Buyer"][yearIndex] += profit;
+      if (item.Outlier === "Bukan Outlier")
+        profitData["Buyer"][yearIndex] += profit;
+    }
+  });
+
+  return {
+    labels: years,
+    datasets: [
+      { label: "Royal Buyer", data: profitData["Royal Buyer"] },
+      { label: "Buyer", data: profitData["Buyer"] },
+      { label: "Diskon Hunter", data: profitData["Diskon Hunter"] },
+    ],
+  };
+}
+
+function processBarData(data) {
+  const categoryLabels = ["Office Supplies", "Furniture", "Technology"];
+  const quantityData = {
+    Buyer: [0, 0, 0],
+    "Discount Hunter": [0, 0, 0],
+    "Royal Buyer": [0, 0, 0],
+  };
+
+  data.forEach((item) => {
+    const categoryIndex = categoryLabels.indexOf(item.Category);
+    if (categoryIndex !== -1) {
+      if (item.Outlier === "Outlier Bawah")
+        quantityData["Discount Hunter"][categoryIndex] += item.Quantity;
+      if (item.Outlier === "Outlier Atas")
+        quantityData["Royal Buyer"][categoryIndex] += item.Quantity;
+      if (item.Outlier === "Bukan Outlier")
+        quantityData["Buyer"][categoryIndex] += item.Quantity;
+    }
+  });
+
+  return { labels: categoryLabels, datasets: quantityData };
+}
+
+function processBestSellerData(data) {
+  const subCategorySales = {};
+  data.forEach((item) => {
+    const subCategoryName = item["Sub-Category"];
+    const sales = parseFloat(item.Sales.replace(/[$,]/g, ""));
+    subCategorySales[subCategoryName] =
+      (subCategorySales[subCategoryName] || 0) + sales;
+  });
+
+  const topSubCategories = Object.keys(subCategorySales)
+    .map((subCategory) => ({
+      subCategory,
+      sales: subCategorySales[subCategory],
+    }))
+    .sort((a, b) => b.sales - a.sales)
+    .slice(0, 5);
+
+  return {
+    labels: topSubCategories.map((item) => item.subCategory),
+    datasets: [
+      { label: "Sales", data: topSubCategories.map((item) => item.sales) },
+    ],
+  };
+}
+
+function processBestProfitData(data) {
+  const cityProfit = {};
+  data.forEach((item) => {
+    const cityName = item.City;
+    const profit = parseFloat(item.Profit.replace(/[$,]/g, ""));
+    cityProfit[cityName] = (cityProfit[cityName] || 0) + profit;
+  });
+
+  const topCities = Object.keys(cityProfit)
+    .map((city) => ({ city, profit: cityProfit[city] }))
+    .sort((a, b) => b.profit - a.profit)
+    .slice(0, 5);
+
+  return {
+    labels: topCities.map((item) => item.city),
+    datasets: [{ label: "Profit", data: topCities.map((item) => item.profit) }],
+  };
+}
+
+function processCustomerRegionData(data) {
+  const regions = ["West", "East", "Central", "South"];
+  const customerData = {
+    Buyer: new Array(regions.length).fill(0),
+    "Discount Hunter": new Array(regions.length).fill(0),
+    "Royal Buyer": new Array(regions.length).fill(0),
+  };
+
+  const uniqueCustomers = {};
+
+  data.forEach((item) => {
+    const region = item.Region;
+    const customerId = item["Customer_ID"];
+    const outlier = item.Outlier;
+
+    if (!uniqueCustomers[customerId]) {
+      uniqueCustomers[customerId] = { region: region, outlier: outlier };
+    }
+  });
+
+  Object.values(uniqueCustomers).forEach((customer) => {
+    const regionIndex = regions.indexOf(customer.region);
+    if (regionIndex !== -1) {
+      if (customer.outlier === "Outlier Bawah")
+        customerData["Discount Hunter"][regionIndex]++;
+      if (customer.outlier === "Outlier Atas")
+        customerData["Royal Buyer"][regionIndex]++;
+      if (customer.outlier === "Bukan Outlier")
+        customerData["Buyer"][regionIndex]++;
+    }
+  });
+
+  return { labels: regions, datasets: customerData };
+}
+
+function processBestSellerCityData(data) {
+  const citySales = {};
+
+  data.forEach((item) => {
+    const cityName = item.City;
+    const sales = parseFloat(item.Sales.replace(/[$,]/g, ""));
+    citySales[cityName] = (citySales[cityName] || 0) + sales;
+  });
+
+  const topCities = Object.keys(citySales)
+    .map((city) => ({ city, sales: citySales[city] }))
+    .sort((a, b) => b.sales - a.sales)
+    .slice(0, 5);
+
+  return {
+    labels: topCities.map((item) => item.city),
+    datasets: [{ label: "Sales", data: topCities.map((item) => item.sales) }],
+  };
+}
+
+//Chart Initialization Functions
+let chartInstances = {};
+
+function initializeChart(ctx, type, data, config) {
+  if (chartInstances[type]) {
+    chartInstances[type].destroy();
   }
-
-  // Bar chart data processing
-  function processBarData(data) {
-    const labels = ["Office Supplies", "Furniture", "Technology"];
-    const quantityData = {
-      Buyer: [0, 0, 0],
-      "Discount Hunter": [0, 0, 0],
-      "Royal Buyer": [0, 0, 0],
-    };
-
-    data.forEach((item) => {
-      const categoryIndex = labels.indexOf(item.Category);
-      if (categoryIndex !== -1) {
-        if (item.Outlier === "Outlier Bawah")
-          quantityData["Discount Hunter"][categoryIndex] += item.Quantity;
-        else if (item.Outlier === "Outlier Atas")
-          quantityData["Royal Buyer"][categoryIndex] += item.Quantity;
-        else quantityData["Buyer"][categoryIndex] += item.Quantity;
-      }
-    });
-
-    return {
-      labels,
+  const processedData = config.processData(data);
+  chartInstances[type] = new Chart(ctx, {
+    type: config.type,
+    data: {
+      labels: processedData.labels,
       datasets: [
         {
-          label: "Buyer",
-          backgroundColor: "rgb(124, 191, 125)",
-          data: quantityData["Buyer"],
-        },
-        {
-          label: "Discount Hunter",
-          backgroundColor: "rgb(34, 110, 30)",
-          data: quantityData["Discount Hunter"],
-        },
-        {
-          label: "Royal Buyer",
-          backgroundColor: "rgb(34, 34, 34)",
-          data: quantityData["Royal Buyer"],
-        },
-      ],
-    };
-  }
-
-  // Best seller chart data processing
-  function processBestSellerData(data) {
-    const salesData = {};
-    data.forEach((item) => {
-      const subCategory = item["Sub-Category"];
-      const sales = parseFloat(item.Sales.replace(/[$,]/g, ""));
-      salesData[subCategory] = (salesData[subCategory] || 0) + sales;
-    });
-
-    const topSubCategories = Object.entries(salesData)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5)
-      .map(([subCategory, sales]) => ({ subCategory, sales }));
-
-    return {
-      labels: topSubCategories.map((item) => item.subCategory),
-      datasets: [
-        {
-          label: "Sales",
-          backgroundColor: "rgb(124, 191, 125)",
-          data: topSubCategories.map((item) => item.sales),
+          label: config.label,
+          data: processedData.data,
           borderWidth: 1,
+          backgroundColor: config.colors,
         },
       ],
-    };
+    },
+    options: config.options,
+    plugins: [ChartDataLabels],
+  });
+}
+
+function initializeLineChart(ctx, data) {
+  if (chartInstances.lineChart) {
+    chartInstances.lineChart.destroy();
   }
-
-  // Best profit chart data processing
-  function processBestProfitData(data) {
-    const profitData = {};
-    data.forEach((item) => {
-      const city = item.City;
-      const profit = parseFloat(item.Profit.replace(/[$,]/g, ""));
-      profitData[city] = (profitData[city] || 0) + profit;
-    });
-
-    const topCities = Object.entries(profitData)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5)
-      .map(([city, profit]) => ({ city, profit }));
-
-    return {
-      labels: topCities.map((item) => item.city),
-      datasets: [
-        {
-          label: "Profit",
-          backgroundColor: "rgb(124, 191, 125)",
-          data: topCities.map((item) => item.profit),
-          borderWidth: 1,
-        },
-      ],
-    };
-  }
-
-  // Customer region chart data processing
-  function processCustomerRegionData(data) {
-    const regions = ["West", "East", "Central", "South"];
-    const customerData = {
-      Buyer: Array(regions.length).fill(0),
-      "Discount Hunter": Array(regions.length).fill(0),
-      "Royal Buyer": Array(regions.length).fill(0),
-    };
-
-    const uniqueCustomers = {};
-
-    data.forEach((item) => {
-      const customerId = item["Customer_ID"];
-      if (!uniqueCustomers[customerId]) {
-        uniqueCustomers[customerId] = {
-          region: item.Region,
-          outlier: item.Outlier,
-        };
-      }
-    });
-
-    Object.values(uniqueCustomers).forEach((customer) => {
-      const regionIndex = regions.indexOf(customer.region);
-      if (regionIndex !== -1) {
-        if (customer.outlier === "Outlier Bawah")
-          customerData["Discount Hunter"][regionIndex]++;
-        else if (customer.outlier === "Outlier Atas")
-          customerData["Royal Buyer"][regionIndex]++;
-        else customerData["Buyer"][regionIndex]++;
-      }
-    });
-
-    return {
-      labels: regions,
-      datasets: [
-        {
-          label: "Buyer",
-          backgroundColor: "rgb(124, 191, 125)",
-          data: customerData["Buyer"],
-        },
-        {
-          label: "Discount Hunter",
-          backgroundColor: "rgb(34, 34, 34)",
-          data: customerData["Discount Hunter"],
-        },
-        {
-          label: "Royal Buyer",
-          backgroundColor: "rgb(34, 110, 30)",
-          data: customerData["Royal Buyer"],
-        },
-      ],
-    };
-  }
-
-  // Best seller city chart data processing
-  function processBestSellerCityData(data) {
-    const salesData = {};
-    data.forEach((item) => {
-      const city = item.City;
-      const sales = parseFloat(item.Sales.replace(/[$,]/g, ""));
-      salesData[city] = (salesData[city] || 0) + sales;
-    });
-
-    const topCities = Object.entries(salesData)
-      .sort(([, a], [, b]) => b - a)
-      .slice(0, 5)
-      .map(([city, sales]) => ({ city, sales }));
-
-    return {
-      labels: topCities.map((item) => item.city),
-      datasets: [
-        {
-          label: "Sales",
-          backgroundColor: "rgb(124, 191, 125)",
-          data: topCities.map((item) => item.sales),
-          borderWidth: 1,
-        },
-      ],
-    };
-  }
-
-  // Initialize or update the chart
-  function initializeChart(ctx, chartType, data) {
-    const processedData = processData(data, chartType);
-    console.log("Processed data:", processedData);
-    return new Chart(ctx, {
-      type: chartType.includes("doughnut") ? "doughnut" : "bar",
-      data: processedData,
-      options: getChartOptions(chartType),
-      plugins: [ChartDataLabels],
-    });
-  }
-
-  // Get chart options based on chart type
-  function getChartOptions(chartType) {
-    const options = {
+  const lineData = processLineData(data);
+  chartInstances.lineChart = new Chart(ctx, {
+    type: "line",
+    data: lineData,
+    options: {
       responsive: true,
-      maintainAspectRatio: true,
+      maintainAspectRatio: false,
       plugins: {
-        legend: {
-          position: "top",
-        },
+        title: { display: true, text: "Total Profit (year)" },
         tooltip: {
-          enabled: true,
+          callbacks: {
+            label: function (tooltipItem) {
+              return "Rp " + tooltipItem.raw.toLocaleString();
+            },
+          },
         },
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: function (value) {
+              return "Rp " + value.toLocaleString();
+            },
+          },
+        },
+      },
+    },
+  });
+}
+
+function initializeBarChart(ctx, data, processDataFunc, label) {
+  if (chartInstances[label]) {
+    chartInstances[label].destroy();
+  }
+  const processedData = processDataFunc(data);
+  chartInstances[label] = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: processedData.labels,
+      datasets: [
+        {
+          label: label,
+          data: processedData.datasets[0].data,
+          backgroundColor: "rgb(124, 191, 125)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis: "y",
+      scales: { y: { beginAtZero: true } },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              return "$" + tooltipItem.raw.toFixed(2);
+            },
+          },
+        },
+      },
+    },
+  });
+}
+
+//chart style configuration
+const chartConfigs = {
+  doughnut1: {
+    type: "doughnut",
+    label: "Total Customers by Type Customers",
+    colors: ["rgb(34, 110, 30)", "rgb(124, 191, 125)", "rgb(34, 34, 34)"],
+    processData: processDoughnut1Data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top" },
+        tooltip: { enabled: true },
         datalabels: {
           color: "rgb(237, 237, 237)",
           formatter: (value, context) => {
@@ -324,46 +336,104 @@ document.addEventListener("DOMContentLoaded", () => {
               (sum, current) => sum + current,
               0
             );
-            return `${((value / total) * 100).toFixed(1)}%`;
+            return ((value / total) * 100).toFixed(1) + "%";
           },
         },
       },
       elements: {
-        arc: {
-          borderWidth: 2,
-          borderColor: "rgb(237, 237, 237)",
-        },
+        arc: { borderWidth: 2, borderColor: "rgb(237, 237, 237)" },
       },
-    };
-
-    if (chartType === "line") {
-      options.plugins.title = {
-        display: true,
-        text: "Total Profit (year)",
-      };
-      options.scales = {
-        y: {
-          beginAtZero: true,
-          ticks: {
-            callback: (value) => `Rp ${value.toLocaleString()}`,
+    },
+  },
+  doughnut2: {
+    type: "doughnut",
+    label: "Distribusi Order by Segment",
+    colors: ["rgb(124, 191, 125)", "rgb(34, 110, 30)", "rgb(34, 34, 34)"],
+    processData: processDoughnut2Data,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top" },
+        tooltip: { enabled: true },
+        datalabels: {
+          color: "rgb(237, 237, 237)",
+          formatter: (value, context) => {
+            const total = context.chart.data.datasets[0].data.reduce(
+              (sum, current) => sum + current,
+              0
+            );
+            return ((value / total) * 100).toFixed(1) + "%";
           },
         },
-      };
-    } else {
-      options.indexAxis = "y";
-      options.scales = {
-        y: {
-          beginAtZero: true,
+      },
+      elements: {
+        arc: { borderWidth: 2, borderColor: "rgb(237, 237, 237)" },
+      },
+    },
+  },
+  salesbySegment: {
+    type: "bar",
+    label: "Sales",
+    colors: ["rgb(124, 191, 125)", "rgb(34, 110, 30)", "rgb(34, 34, 34)"],
+    processData: processSalesBySegmentData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top" },
+        tooltip: { enabled: true },
+        datalabels: {
+          color: "rgb(237, 237, 237)",
+          formatter: (value, context) => {
+            const total = context.chart.data.datasets[0].data.reduce(
+              (sum, current) => sum + current,
+              0
+            );
+            return ((value / total) * 100).toFixed(1) + "%";
+          },
         },
-      };
-    }
+      },
+      scales: { y: { beginAtZero: true } },
+      elements: {
+        arc: { borderWidth: 2, borderColor: "rgb(237, 237, 237)" },
+      },
+    },
+  },
+  profitbySegment: {
+    type: "bar",
+    label: "Profit",
+    colors: ["rgb(124, 191, 125)", "rgb(34, 110, 30)", "rgb(34, 34, 34)"],
+    processData: processProfitBySegmentData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "top" },
+        tooltip: { enabled: true },
+        datalabels: {
+          color: "rgb(237, 237, 237)",
+          formatter: (value, context) => {
+            const total = context.chart.data.datasets[0].data.reduce(
+              (sum, current) => sum + current,
+              0
+            );
+            return ((value / total) * 100).toFixed(1) + "%";
+          },
+        },
+      },
+      scales: { y: { beginAtZero: true } },
+      elements: {
+        arc: { borderWidth: 2, borderColor: "rgb(237, 237, 237)" },
+      },
+    },
+  },
+};
 
-    return options;
-  }
-
-  // Chart contexts
-  const contexts = {
+document.addEventListener("DOMContentLoaded", () => {
+  const chartContexts = {
     doughnut1: document.getElementById("doughnut1").getContext("2d"),
+    doughnut2: document.getElementById("doughnut2").getContext("2d"),
     lineChart: document.getElementById("lineChart").getContext("2d"),
     quantityChart: document.getElementById("quantityChart").getContext("2d"),
     bestSellerChart: document
@@ -378,120 +448,71 @@ document.addEventListener("DOMContentLoaded", () => {
     bestSellerCityChart: document
       .getElementById("bestSellerCityChart")
       .getContext("2d"),
+    salesbySegmentChart: document
+      .getElementById("salesbySegmentChart")
+      .getContext("2d"),
+    profitbySegmentChart: document
+      .getElementById("profitbySegmentChart")
+      .getContext("2d"),
   };
 
-  // Fetch data and initialize charts
-  fetchData(API_URL, (data) => {
-    initializeChart(contexts.doughnut1, "doughnut1", data);
-    new Chart(contexts.lineChart, {
-      type: "line",
-      data: processData(data, "line"),
-      options: getChartOptions("line"),
-    });
-    new Chart(contexts.quantityChart, {
-      type: "bar",
-      data: processData(data, "bar"),
-      options: getChartOptions("bar"),
-    });
-    new Chart(contexts.bestSellerChart, {
-      type: "bar",
-      data: processData(data, "bestSeller"),
-      options: getChartOptions("bestSeller"),
-    });
-    new Chart(contexts.bestProfitChart, {
-      type: "bar",
-      data: processData(data, "bestProfit"),
-      options: getChartOptions("bestProfit"),
-    });
-    new Chart(contexts.customerRegionChart, {
-      type: "bar",
-      data: processData(data, "customerRegion"),
-      options: getChartOptions("customerRegion"),
-    });
-    new Chart(contexts.bestSellerCityChart, {
-      type: "bar",
-      data: processData(data, "bestSellerCity"),
-      options: getChartOptions("bestSellerCity"),
-    });
+  fetchData("./Superstore.json", (data) => {
+    initializeChart(
+      chartContexts.doughnut1,
+      "doughnut1",
+      data,
+      chartConfigs.doughnut1
+    );
+    initializeChart(
+      chartContexts.doughnut2,
+      "doughnut2",
+      data,
+      chartConfigs.doughnut2
+    );
+    initializeChart(
+      chartContexts.salesbySegmentChart,
+      "salesbySegment",
+      data,
+      chartConfigs.salesbySegment
+    );
+    initializeChart(
+      chartContexts.profitbySegmentChart,
+      "profitbySegment",
+      data,
+      chartConfigs.profitbySegment
+    );
+
+    initializeLineChart(chartContexts.lineChart, data);
+
+    initializeBarChart(
+      chartContexts.quantityChart,
+      data,
+      processBarData,
+      "Quantity by Category and Customer Type"
+    );
+    initializeBarChart(
+      chartContexts.bestSellerChart,
+      data,
+      processBestSellerData,
+      "Best Sellers by Sub-Category"
+    );
+    initializeBarChart(
+      chartContexts.bestProfitChart,
+      data,
+      processBestProfitData,
+      "Best Profit by City"
+    );
+    initializeBarChart(
+      chartContexts.customerRegionChart,
+      data,
+      processCustomerRegionData,
+      "Customer Distribution by Region and Type"
+    );
+    initializeBarChart(
+      chartContexts.bestSellerCityChart,
+      data,
+      processBestSellerCityData,
+      "Sales by City"
+    );
   });
 });
-
-const doughnut2ctx = document.getElementById("doughnut2").getContext("2d");
-const doughnut2chart = new Chart(doughnut2ctx, {
-  type: "doughnut",
-  data: {
-    labels: ["Consumer", "Corporate", "Home Office"],
-    datasets: [
-      {
-        label: "Distribusi Order by Segment",
-        data: [2.586, 1.514, 909],
-        borderWidth: 1,
-        backgroundColor: [
-          "rgb(124, 191, 125)",
-          "rgb(34, 110, 30)",
-          "rgb(34, 34, 34)",
-        ],
-      },
-    ],
-  },
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-});
-
-const salesbySegmentChartCtx = document
-  .getElementById("salesbySegmentChart")
-  .getContext("2d");
-const salesbySegmentChart = new Chart(salesbySegmentChartCtx, {
-  type: "bar",
-  data: {
-    labels: ["Consumer", "Corporate", "Home Office"],
-    datasets: [
-      {
-        label: "Sales",
-        backgroundColor: "rgb(124, 191, 125)",
-        data: [546.712, 302.178, 179.106],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    indexAxis: "y",
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-});
-
-const profitbySegmentChartCtx = document
-  .getElementById("profitbySegmentChart")
-  .getContext("2d");
-const profitbySegmentChart = new Chart(profitbySegmentChartCtx, {
-  type: "bar",
-  data: {
-    labels: ["Consumer", "Corporate", "Home Office"],
-    datasets: [
-      {
-        label: "Profit",
-        backgroundColor: "rgb(124, 191, 125)",
-        data: [2.236, 1.358, 842.935],
-        borderWidth: 1,
-      },
-    ],
-  },
-  options: {
-    indexAxis: "y",
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  },
-});
-// Sampai sini js CHART

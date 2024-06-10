@@ -394,7 +394,7 @@ table th {
 /* Dashboard Charts */
 #dashboard {
   width: 100%;
-  padding: 36px 24px;
+  padding: 24px 24px;
   font-family: var(--poppins);
 }
 
@@ -402,8 +402,8 @@ table th {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-gap: 24px;
-  margin-top: 36px;
 }
+
 #dashboard .box-info li {
   padding: 24px;
   background: var(--light);
@@ -442,58 +442,33 @@ table th {
   color: var(--dark);
 }
 
-.table-data {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 100%;
-  gap: 24px;
-  margin-top: 24px;
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  grid-gap: 24px;
+  padding-top: 24px;
+  max-width: auto;
   width: 100%;
-  color: var(--dark);
-}
-.table-data > div {
-  border-radius: 20px;
-  background: var(--light);
-  padding: 24px;
-  overflow-x: auto;
-}
-.table-data .head {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
-  text-align: center;
-}
-#dashboard main .table-data .head h3 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.5em;
-  color: #444;
-}
-#dashboard main .table-data .head .bx {
-  cursor: pointer;
 }
 
-#dashboard main .table-data .chart {
-  display: flex;
-  width: 100%;
-  margin: 0 auto 40px;
-  padding: 20px;
+.chart-container {
   background: #fff;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.chart {
-  height: 300px;
-  position: relative;
+.chart-container h3 {
+  margin-bottom: 20px;
 }
 
 canvas {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 400px !important;
 }
-
 /* Media Queries untuk Responsive Design */
 
 @media (max-width: 1200px) {

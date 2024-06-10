@@ -4,13 +4,15 @@ document.addEventListener("DOMContentLoaded", function () {
   let totalPages = 1;
   let data = [];
   let filteredData = [];
+  let sortColumn = null;
+  let sortDirection = null;
 
   fetch("./Superstore.json")
     .then((response) => response.json())
     .then((jsonData) => {
       data = jsonData;
       filteredData = data;
-      totalPages = Math.ceil(data.length / rowsPerPage);
+      totalPages = Math.ceil(filteredData.length / rowsPerPage);
       displayPage(currentPage);
     })
     .catch((error) => console.error("Error fetching data:", error));
@@ -21,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const start = (page - 1) * rowsPerPage;
     const end = start + rowsPerPage;
-    const pageData = data.slice(start, end);
+    const pageData = filteredData.slice(start, end);
 
     pageData.forEach((item) => {
       const row = document.createElement("tr");
@@ -77,4 +79,88 @@ document.addEventListener("DOMContentLoaded", function () {
     currentPage = 1; // Reset ke halaman pertama setiap kali pencarian
     displayPage(currentPage);
   });
+
+  const pageInfo = document.getElementById("page-info");
+  const pageInput = document.getElementById("page-input");
+
+  pageInfo.addEventListener("click", function () {
+    pageInput.classList.remove("hidden");
+    pageInfo.classList.add("hidden");
+    pageInput.value = currentPage;
+    pageInput.focus();
+  });
+
+  pageInput.addEventListener("blur", function () {
+    handlePageChange();
+  });
+
+  pageInput.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handlePageChange();
+    }
+  });
+
+  function handlePageChange() {
+    const pageInputValue = parseInt(pageInput.value);
+    if (
+      !isNaN(pageInputValue) &&
+      pageInputValue >= 1 &&
+      pageInputValue <= totalPages
+    ) {
+      currentPage = pageInputValue;
+      displayPage(currentPage);
+    }
+    pageInput.classList.add("hidden");
+    pageInfo.classList.remove("hidden");
+  }
+
+  function setupSorting() {
+    document.querySelectorAll("#Superstore-table th").forEach((th) => {
+      th.addEventListener("click", function () {
+        const column = th.getAttribute("data-column");
+        if (sortColumn === column) {
+          sortDirection = sortDirection === "asc" ? "desc" : "asc";
+        } else {
+          sortColumn = column;
+          sortDirection = "asc";
+        }
+        sortTableData();
+        displayPage(currentPage);
+        updateSortIndicators();
+      });
+    });
+  }
+
+  function sortTableData() {
+    filteredData.sort((a, b) => {
+      let aValue = a[sortColumn];
+      let bValue = b[sortColumn];
+
+      // Convert to Date objects if sorting by date
+      if (sortColumn.includes("Date")) {
+        aValue = new Date(aValue);
+        bValue = new Date(bValue);
+      }
+
+      if (sortDirection === "asc") {
+        return aValue > bValue ? 1 : -1;
+      } else {
+        return aValue < bValue ? 1 : -1;
+      }
+    });
+  }
+
+  function updateSortIndicators() {
+    document.querySelectorAll("#Superstore-table th").forEach((th) => {
+      th.classList.remove("sorted-asc", "sorted-desc");
+      if (th.getAttribute("data-column") === sortColumn) {
+        if (sortDirection === "asc") {
+          th.classList.add("sorted-asc");
+        } else {
+          th.classList.add("sorted-desc");
+        }
+      }
+    });
+  }
 });

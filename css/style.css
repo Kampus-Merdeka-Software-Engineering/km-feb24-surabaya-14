@@ -32,8 +32,7 @@ li {
   --green: #1f674a;
   --light-green: #398166;
 }
-
-html {
+*/ html {
   overflow-x: hidden;
 }
 
@@ -68,8 +67,8 @@ header .logo {
 
 .logo img {
   width: 50%;
-  max-width: 150px; /* Atur max-width agar logo tidak terlalu besar */
-  height: auto; /* Pastikan tinggi otomatis mengikuti lebar untuk menjaga aspek rasio */
+  max-width: 150px;
+  height: auto;
 }
 
 .navbar {
@@ -166,40 +165,33 @@ nav ul.navbar li a {
   color: var(--dark);
 }
 
-#content main .table-data {
-  display: flex;
-  flex-wrap: wrap;
-  grid-gap: 24px;
-  margin-top: 24px;
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: auto;
   width: 100%;
-  color: var(--dark);
 }
-#content main .table-data > div {
-  border-radius: 20px;
-  background: var(--light);
-  padding: 24px;
-  overflow-x: auto;
-}
-#content main .table-data .head {
+
+.chart-container {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  grid-gap: 16px;
-  margin-bottom: 24px;
-}
-#content main .table-data .head h3 {
-  margin-right: auto;
-  font-size: 24px;
-  font-weight: 600;
-}
-#content main .table-data .head .bx {
-  cursor: pointer;
 }
 
-#content main .table-data .order {
-  flex-grow: 1;
-  flex-basis: 500px;
+.chart-container h3 {
+  margin-bottom: 20px;
 }
 
+canvas {
+  width: 100% !important;
+  height: 325px !important;
+}
 /* MAIN */
 
 /* FOOTER */

@@ -86,9 +86,54 @@ table th {
   cursor: not-allowed;
 }
 
+#page-input::-webkit-outer-spin-button,
+#page-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#page-input {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Style adjustments for better appearance */
+#page-info,
+#page-input {
+  border: none;
+  background: none;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: inherit;
+  padding: 0;
+  width: auto;
+}
+
 #page-info {
-  margin: 0 10px;
-  font-weight: bold;
+  border-bottom: 1px none #000; /* Add a subtle underline to indicate it's clickable */
+}
+
+#page-input {
+  outline: none;
+  font-size: inherit;
+  width: 50px;
+}
+
+.hidden {
+  display: none;
+}
+
+th {
+  cursor: pointer;
+}
+
+th.sorted-asc::after {
+  content: " ▲";
+}
+
+th.sorted-desc::after {
+  content: " ▼";
 }
 
 @media (max-width: 1200px) {

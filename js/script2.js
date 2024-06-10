@@ -265,13 +265,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fungsi untuk memproses data untuk line chart
   function processLineData(data) {
-    const years = ["2014", "2015", "2016", "2017"];
+    // Extract unique years from the data and sort them
+    const years = Array.from(
+      new Set(
+        data.map((item) =>
+          new Date(item["Order_Date"]).getFullYear().toString()
+        )
+      )
+    ).sort();
+
+    // Initialize the profit data structure
     const profitData = {
       "Royal Buyer": new Array(years.length).fill(0),
       Buyer: new Array(years.length).fill(0),
       "Diskon Hunter": new Array(years.length).fill(0),
     };
 
+    // Aggregate the profit by year and outlier type
     data.forEach((item) => {
       const orderDate = new Date(item["Order_Date"]);
       const year = orderDate.getFullYear().toString();
@@ -279,37 +289,51 @@ document.addEventListener("DOMContentLoaded", () => {
       const profit = parseFloat(item.Profit.replace(/[$,]/g, ""));
 
       if (yearIndex !== -1) {
-        if (item.Outlier === "Outlier Bawah")
+        if (item.Outlier === "Outlier Bawah") {
           profitData["Diskon Hunter"][yearIndex] += profit;
-        if (item.Outlier === "Outlier Atas")
+        } else if (item.Outlier === "Outlier Atas") {
           profitData["Royal Buyer"][yearIndex] += profit;
-        if (item.Outlier === "Bukan Outlier")
+        } else if (item.Outlier === "Bukan Outlier") {
           profitData["Buyer"][yearIndex] += profit;
+        }
       }
     });
 
+    console.log("Processed Profit Data:", profitData);
+
+    // Sort the data by profit for each year
+    const sortedYears = years.map((year, index) => {
+      return {
+        year,
+        "Royal Buyer": profitData["Royal Buyer"][index],
+        Buyer: profitData["Buyer"][index],
+        "Diskon Hunter": profitData["Diskon Hunter"][index],
+      };
+    });
+
+    // Return the processed data
     return {
       labels: years,
       datasets: [
         {
           label: "Royal Buyer",
           backgroundColor: "rgb(34, 110, 30)",
-          borderColor: "rgb(34, 110, 30, 1)",
-          data: profitData["Royal Buyer"],
+          borderColor: "rgb(34, 110, 30)",
+          data: sortedYears.map((item) => item["Royal Buyer"]),
           fill: false,
         },
         {
           label: "Buyer",
           backgroundColor: "rgb(124, 191, 125)",
           borderColor: "rgb(124, 191, 125)",
-          data: profitData["Buyer"],
+          data: sortedYears.map((item) => item.Buyer),
           fill: false,
         },
         {
           label: "Diskon Hunter",
           backgroundColor: "rgb(34, 34, 34)",
-          borderColor: "rgb(34, 34, 34, 1)",
-          data: profitData["Diskon Hunter"],
+          borderColor: "rgb(34, 34, 34)",
+          data: sortedYears.map((item) => item["Diskon Hunter"]),
           fill: false,
         },
       ],

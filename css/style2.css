@@ -221,10 +221,19 @@ footer {
 /* Member */
 .member {
   display: flex;
+  flex-direction: column;
   padding: 0 35px;
   align-items: center;
   justify-content: center;
   min-height: 80vh;
+  text-align: center;
+}
+
+.member h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: var(--lato);
 }
 
 .wrapper {
@@ -313,10 +322,12 @@ footer {
   font-weight: 500;
   font-size: 1.56rem;
   margin: 30px 0 5px;
+  font-family: var(--poppins);
 }
 .carousel .card span {
   color: #6a6d78;
   font-size: 1.31rem;
+  font-family: var(--poppins);
 }
 
 /* Table */

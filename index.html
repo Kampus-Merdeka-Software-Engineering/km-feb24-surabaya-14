@@ -1,188 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Boxicons -->
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- <link rel="stylesheet" href="css/Landing_Page.css"> -->
 
-	<!-- Boxicons -->
-	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-	<!-- My CSS -->
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/Landing_Page.css">
+    <title>Team 14 - Revou</title>
+  </head>
 
-	<title>Team 14 - Revou</title>
-</head>
-
-<body>
-	<!-- NAVBAR -->
-	<header class="header">
-        <div class="logo">
-            <img src="assets/logo_giant.png" alt="Giant">
+  <body>
+    <!-- NAVBAR -->
+    <header class="header">
+      <div class="logo">
+        <img src="assets/logo_giant.png" alt="Giant" />
+      </div>
+      <nav>
+        <ul class="navbar">
+          <li><a href="index.html">Dashboard</a></li>
+          <li><a href="tabel.html">Data</a></li>
+          <li><a href="Landing_Page.html">Home</a></li>
+        </ul>
+        <div class="burger">
+          <div class="line1"></div>
+          <div class="line2"></div>
+          <div class="line3"></div>
         </div>
-        <nav>
-            <ul class="navbar">
-                <li><a href="index.html">Dashboard</a></li>
-                <li><a href="tabel.html">Data</a></li>
-                <li><a href="Landing_Page.html">Home</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
+      </nav>
     </header>
-	<!-- NAVBAR -->
-	 
-	<!-- CONTENT -->
-	<section id="content">
-		<!-- MAIN -->
-		<main>
-			<!-- NAMBAH DARI SINI UNTUK BAGIAN CHART -->
-			<ul class="box-info">
-				<li>
-					<i class='bx bxs-calendar-check'></i>
-					<span class="text">
-						<h3>5009</h3>
-						<p>Total order</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-group'></i>
-					<span class="text">
-						<h3>793</h3>
-						<p>Total Customer</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-dollar-circle'></i>
-					<span class="text">
-						<h3>1,0 M</h3>
-						<p>Total Sales</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-dollar-circle'></i>
-					<span class="text">
-						<h3>4,6 M</h3>
-						<p>Total Profit</p>
-					</span>
-				</li>
-			</ul>
+    <!-- NAVBAR -->
 
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Total Customer By Type Customer</h3>
-					</div>
-					<div class="chart">
-						<canvas id="doughnut1"></canvas>
-					<div>
-				</div>
+    <!-- CONTENT -->
+    <section id="content">
+      <!-- MAIN -->
+      <main>
+        <!-- NAMBAH DARI SINI UNTUK BAGIAN CHART -->
+        <ul class="box-info">
+          <li>
+            <i class="bx bxs-calendar-check"></i>
+            <span class="text">
+              <h3>5009</h3>
+              <p>Total order</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bxs-group"></i>
+            <span class="text">
+              <h3>793</h3>
+              <p>Total Customer</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bxs-dollar-circle"></i>
+            <span class="text">
+              <h3>1,0 M</h3>
+              <p>Total Sales</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bxs-dollar-circle"></i>
+            <span class="text">
+              <h3>4,6 M</h3>
+              <p>Total Profit</p>
+            </span>
+          </li>
+        </ul>
 
-				<div class="order">
-					<div class="head">
-						<h3>Total Profit (year)</h3>
-					</div>
-					<div>
-						<canvas id="lineChart"></canvas>
-					</div>
-				</div>
+        <div class="container">
+          <div class="chart-container">
+            <h3>Total Customer By Type Customer</h3>
+            <canvas id="doughnut1"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Total Profit (year)</h3>
+            <canvas id="lineChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Total Quantity Category by Customer</h3>
+            <canvas id="quantityChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>5 Best Seller of Sub-Category</h3>
+            <canvas id="bestSellerChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>5 Best Profitable of Sub-Category</h3>
+            <canvas id="bestProfitChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Total Customer by Region</h3>
+            <canvas id="customerRegionChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>5 Best Seller of City</h3>
+            <canvas id="bestSellerCityChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>5 Top Profitable City</h3>
+            <canvas id="topProfitableCityChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Distribusi Order by Segment</h3>
+            <canvas id="doughnut2"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Sales by Segment</h3>
+            <canvas id="salesbySegmentChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Profit by Segment</h3>
+            <canvas id="profitbySegmentChart"></canvas>
+          </div>
+        </div>
 
-				<div class="order">
-					<div class="head">
-						<h3>Total Quantity Category by Customer</h3>
-					</div>
-					<div>
-						<canvas id="quantityChart"></canvas>
-					</div>
-				</div>
-
-				<div class="order">
-					<div class="head">
-						<h3>5 Best Seller of Sub-Category</h3>
-					</div>
-					<div>
-						<canvas id="bestSellerChart"></canvas>
-					</div>
-				</div>
-
-				<div class="order">
-					<div class="head">
-						<h3>5 Best Profitable of Sub-Category</h3>
-					</div>
-					<div>
-						<canvas id="bestProfitChart"></canvas>
-					</div>
-				</div>
-
-				<div class="order">
-					<div class="head">
-						<h3>Total Customer by Region</h3>
-					</div>
-					<div>
-						<canvas id="customerRegionChart"></canvas>
-					</div>
-				</div>
-
-				<div class="order">
-					<div class="head">
-						<h3>5 Best Seller of City</h3>
-					</div>
-					<div>
-						<canvas id="bestSellerCityChart"></canvas>
-					</div>
-				</div>
-				<div class="order">
-					<div class="head">
-						<h3>5 Top Profitable City</h3>
-					</div>
-					<div>
-						<canvas id="topProfitableCityChart"></canvas>
-					</div>
-				</div>
-				<div class="order">
-					<div class="head">
-						<h3>Distribusi Order by Segment</h3>
-					</div>
-					<div>
-						<canvas id="doughnut2"></canvas>
-					</div>
-				</div>
-				<div class="order">
-					<div class="head">
-						<h3>Sales by Segment</h3>
-					</div>
-					<div>
-						<canvas id="salesbySegmentChart"></canvas>
-					</div>
-				</div>
-				<div class="order">
-					<div class="head">
-						<h3>Profit by Segment</h3>
-					</div>
-					<div>
-						<canvas id="profitbySegmentChart"></canvas>
-					</div>
-				</div>
-			</div>
-		<!-- SAMPAI SINI (CHART) -->
-		</main>
-		<!-- MAIN -->
-		 <!-- FOOTER -->
-		 <Footer>
-			<p>Hak Cipta © 2024.Team 14 Surabaya RevoU.</p>
-		</Footer>
-		<!-- FOOTER -->
-
-	</section>
-	<!-- CONTENT -->
-	<script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
-	<!-- <script src="js/script.js"></script> -->
-	<script src="js/chart.js"></script>
-</body>
-
+        <!-- SAMPAI SINI (CHART) -->
+      </main>
+      <!-- MAIN -->
+      <!-- FOOTER -->
+      <footer>
+        <p>Hak Cipta © 2024.Team 14 Surabaya RevoU.</p>
+      </footer>
+      <!-- FOOTER -->
+    </section>
+    <!-- CONTENT -->
+    <!-- <script src="js/script.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/chart.js"></script>
+  </body>
 </html>

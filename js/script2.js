@@ -232,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data: processedData,
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             position: "top",
@@ -533,7 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data: lineData,
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         plugins: {
           title: {
             display: true,
@@ -567,7 +567,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data: barData,
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         indexAxis: "y",
         scales: {
           y: {
@@ -584,7 +584,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data: bestSellerData,
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         indexAxis: "y",
         scales: {
           y: {
@@ -601,7 +601,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data: bestProfitData,
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         indexAxis: "y",
         scales: {
           y: {
@@ -639,7 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
       data: bestSellerCityData,
       options: {
         responsive: true,
-        maintainAspectRatio: true,
+        maintainAspectRatio: false,
         indexAxis: "y",
         scales: {
           y: {

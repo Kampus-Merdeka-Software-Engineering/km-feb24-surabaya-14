@@ -3,43 +3,152 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Landing Page</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css"
+    />
     <!-- Boxicons -->
     <link
       href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
       rel="stylesheet"
     />
-
-    <link rel="stylesheet" href="css/style.css" />
-    <!-- <link rel="stylesheet" href="css/Landing_Page.css"> -->
-
-    <title>Team 14 - Revou</title>
+    <link rel="stylesheet" href="assets\css\style.css" />
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
   </head>
-
   <body>
-    <!-- NAVBAR -->
     <header class="header">
       <div class="logo">
         <img src="assets/logo_giant.png" alt="Giant" />
       </div>
       <nav>
-        <ul class="navbar">
-          <li><a href="index.html">Dashboard</a></li>
-          <li><a href="tabel.html">Data</a></li>
-          <li><a href="Landing_Page.html">Home</a></li>
-        </ul>
         <div class="burger">
           <div class="line1"></div>
           <div class="line2"></div>
           <div class="line3"></div>
         </div>
+        <ul class="navbar">
+          <li><a href="index.html">Home</a></li>
+          <li><a id="data-link">Data</a></li>
+          <li><a id="dashboard-link">Dashboard</a></li>
+        </ul>
       </nav>
     </header>
-    <!-- NAVBAR -->
-
-    <!-- CONTENT -->
-    <section id="content">
+    <main>
       <!-- MAIN -->
-      <main>
+      <section class="background">
+        <img src="assets/Giant_Superstore.png" alt="Superstore" />
+        <div class="case">
+          <h1>Superstore Case</h1>
+          <p>
+            With growing demands and cut-throat competitions in the market, a
+            Superstore Giant is seeking your knowledge in understanding what
+            works best for them. They would like to understand which products,
+            regions, categories and customer segments they should target or
+            avoid. You can even take this a step further and try and build a
+            Regression model to predict Sales or Profit. Go crazy with the
+            dataset, but also make sure to provide some business insights to
+            improve.
+          </p>
+        </div>
+      </section>
+      <section class="definition">
+        <div class="explain">
+          <h2>Life Cycle Of Data Analysis Project</h2>
+          <p>
+            Life cycle of a data analysis project adalah serangkaian tahapan
+            sistematis yang diikuti untuk melakukan analisis data dalam sebuah
+            proyek. Tujuan utama dari proses ini adalah untuk memperoleh wawasan
+            yang bermakna dari data dan mendukung pengambilan keputusan.
+          </p>
+        </div>
+        <div class="cycle">
+          <div class="cards">
+            <img src="assets/BUI.png" alt="Business Issue Understanding" />
+          </div>
+          <div class="cards">
+            <h3><span>Step 1 </span>Business Issue Understanding</h3>
+            <p>
+              Business Understanding adalah tahap pertama dalam siklus proyek
+              analisis data, yang bertujuan untuk memahami tujuan bisnis dan
+              mengidentifikasi bagaimana analisis data dapat membantu mencapai
+              tujuan tersebut.
+            </p>
+          </div>
+        </div>
+        <div class="cycle">
+          <div class="cards">
+            <img src="assets/DU.png" alt="Data Understanding" />
+          </div>
+          <div class="cards">
+            <h3><span>Step 2 </span>Data Understanding</h3>
+            <p>
+              Data Understanding adalah tahap kedua dalam siklus proyek analisis
+              data, yang bertujuan untuk mengumpulkan dan mengeksplorasi data
+              yang tersedia untuk mendukung tujuan bisnis.
+            </p>
+          </div>
+        </div>
+        <div class="cycle">
+          <div class="cards">
+            <img src="assets/DP.png" alt="Data Preparation" />
+          </div>
+          <div class="cards">
+            <h3><span>Step 3 </span>Data Preparation</h3>
+            <p>
+              Data Preparation adalah tahap ketiga dalam siklus proyek analisis
+              data, yang bertujuan untuk membersihkan dan mengubah data sehingga
+              siap untuk analisis lebih lanjut.
+            </p>
+          </div>
+        </div>
+        <div class="cycle">
+          <div class="cards">
+            <img src="assets/EAM.png" alt="Exploratory Analysis and Modeling" />
+          </div>
+          <div class="cards">
+            <h3><span>Step 4 </span>Exploratory Analysis and Modeling</h3>
+            <p>
+              Exploratory Analysis and Modeling adalah tahap keempat dalam
+              siklus proyek analisis data, yang bertujuan untuk melakukan
+              analisis awal dan membangun model untuk memahami pola dalam data.
+            </p>
+          </div>
+        </div>
+        <div class="cycle">
+          <div class="cards">
+            <img src="assets/V.png" alt="Validation" />
+          </div>
+          <div class="cards">
+            <h3><span>Step 5 </span>Validation</h3>
+            <p>
+              Validation adalah tahap kelima dalam siklus proyek analisis data,
+              yang bertujuan untuk memvalidasi model dan memastikan bahwa hasil
+              analisis sesuai dengan tujuan bisnis.
+            </p>
+          </div>
+        </div>
+        <div class="cycle">
+          <div class="cards">
+            <img src="assets/VP.png" alt="Visualization and Presentation" />
+          </div>
+          <div class="cards">
+            <h3><span>Step 6 </span>Visualization and Presentation</h3>
+            <p>
+              Visualization and Presentation adalah tahap terakhir dalam siklus
+              proyek analisis data, yang bertujuan untuk menyajikan hasil
+              analisis dengan cara yang mudah dipahami dan menarik bagi pemangku
+              kepentingan.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="dashboard" style="display: none">
         <!-- NAMBAH DARI SINI UNTUK BAGIAN CHART -->
         <ul class="box-info">
           <li>
@@ -117,20 +226,146 @@
             <h3>Profit by Segment</h3>
             <canvas id="profitbySegmentChart"></canvas>
           </div>
+          <div class="chart-container">
+            <h3>Best Discount</h3>
+            <div><canvas id="bestDiscountChart"></canvas></div>
+          </div>
         </div>
+      </section>
 
-        <!-- SAMPAI SINI (CHART) -->
-      </main>
-      <!-- MAIN -->
-      <!-- FOOTER -->
-      <footer>
-        <p>Hak Cipta © 2024.Team 14 Surabaya RevoU.</p>
-      </footer>
-      <!-- FOOTER -->
-    </section>
-    <!-- CONTENT -->
-    <!-- <script src="js/script.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="js/chart.js"></script>
+      <section class="member">
+        <h1>Team 14 Member</h1>
+        <div class="wrapper">
+          <i id="left" class="fa-solid fa-angle-left"></i>
+          <ul class="carousel">
+            <li class="card">
+              <div class="img">
+                <img
+                  src="assets/BUI.png"
+                  alt="Blanche Pearson"
+                  draggable="false"
+                />
+              </div>
+              <h2>Blanche Pearson</h2>
+              <span>Sales Manager</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img
+                  src="assets\Team Foto\Team Foto\Reynhard Powiwi_Telkom University.JPG"
+                  alt="Reynhard Powiwi"
+                  draggable="false"
+                />
+              </div>
+              <h2>Reynhard Powiwi</h2>
+              <span>Telkom University</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img
+                  src="assets\Team Foto\Team Foto\Alfika Putri D S_Universitas Semarang.jpg"
+                  alt="Alfika Putri D S"
+                  draggable="false"
+                />
+              </div>
+              <h2>Alfika Putri D S</h2>
+              <span>Universitas Semarang</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img
+                  src="assets\Team Foto\Team Foto\Ayu Diah Permata_Universitas Udayana.JPG"
+                  alt="Ayu Diah Permata"
+                  draggable="false"
+                />
+              </div>
+              <h2>Ayu Diah Permata</h2>
+              <span>Universitas Udayana</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img
+                  src="assets\Team Foto\Team Foto\Katherine Regina_Universitas Indonesia.jpg"
+                  alt="Katherine Regina"
+                  draggable="false"
+                />
+              </div>
+              <h2>Katherine Regina</h2>
+              <span>Universitas Indonesia</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img
+                  src="assets\Team Foto\Team Foto\Salma Dara Canita_Universitas Lampung.png"
+                  alt="Salma Dara Canita"
+                  draggable="false"
+                />
+              </div>
+              <h2>Salma Dara Canita</h2>
+              <span>Universitas Lampung</span>
+            </li>
+            <li class="card">
+              <div class="img">
+                <img
+                  src="assets\Team Foto\Team Foto\Tedy Pawer _ Universitas Muhammadiyah Riau_.jpg"
+                  alt="Tedy Pawer"
+                  draggable="false"
+                />
+              </div>
+              <h2>Tedy Pawer</h2>
+              <span>Universitas Muhammadiyah Riau</span>
+            </li>
+          </ul>
+          <i id="right" class="fa-solid fa-angle-right"></i>
+        </div>
+      </section>
+
+      <!-- TABLE -->
+      <section id="table" style="display: none">
+        <div class="container_table">
+          <input
+            type="text"
+            id="search"
+            placeholder="Search..."
+            style="margin-bottom: 20px; padding: 10px; width: 100%"
+          />
+          <table id="Superstore-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>Ship Date</th>
+                <th>Ship Mode</th>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Product ID</th>
+                <th>Category</th>
+                <th>Sub Category</th>
+                <th>Product Name</th>
+                <th>Sales</th>
+                <th>Quantity</th>
+                <th>Discount</th>
+                <th>Profit</th>
+                <th>Outlier</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div id="pagination">
+            <button id="prev" disabled>Previous</button>
+            <span id="page-info"></span>
+            <button id="next">Next</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <p>Hak Cipta <sup>&#169;</sup> 2024. Team 14 Surabaya RevoU.</p>
+    </footer>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.8.0/dist/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+  <script src="assets\js\script.js"></script>
+  <script src="assets\js\tabel.js"></script>
 </html>

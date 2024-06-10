@@ -124,18 +124,6 @@ table th {
   display: none;
 }
 
-th {
-  cursor: pointer;
-}
-
-th.sorted-asc::after {
-  content: " ▲";
-}
-
-th.sorted-desc::after {
-  content: " ▼";
-}
-
 @media (max-width: 1200px) {
   .logo img {
     justify-content: center;

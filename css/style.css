@@ -111,6 +111,15 @@ nav ul.navbar li a {
   width: 100%;
   padding: 36px 24px;
   font-family: var(--poppins);
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+}
+#content main .head-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-gap: 16px;
+  flex-wrap: wrap;
 }
 
 #content main .box-info {

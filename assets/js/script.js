@@ -521,17 +521,17 @@ new Chart(customerRegionChartCtx, {
       {
         label: "Buyer",
         backgroundColor: "rgb(124, 191, 125)",
-        data: [646, 605, 499, 450],
+        data: [2316, 1736, 1241, 1006],
       },
       {
         label: "Discount Hunter",
         backgroundColor: "rgba(34, 34, 34)",
-        data: [299, 369, 396, 213],
+        data: [461, 704, 807, 330],
       },
       {
         label: "Royal Buyer",
         backgroundColor: "rgb(34, 110, 30)",
-        data: [297, 296, 218, 168],
+        data: [426, 407, 275, 224],
       },
     ],
   },
@@ -556,27 +556,29 @@ new Chart(bestSellerCityChartCtx, {
       "New York City",
       "Los Angeles",
       "Philadelphia",
-      "San Fransisco",
+      "San Francisco",
     ],
     datasets: [
       {
         label: "Sales",
         backgroundColor: "rgb(124, 191, 125)",
         data: [
-          106914599.61, 96552755.52, 91905956.66, 78342678.68, 51660083.64,
+          106.91459961, 96.55275552, 91.90595666, 78.34267868, 51.66008364,
         ],
         borderWidth: 1,
       },
     ],
   },
   options: {
-    indexAxis: "y",
     scales: {
+      x: {
+        beginAtZero: true,
+      },
       y: {
         beginAtZero: true,
         ticks: {
           callback: function (value) {
-            return "$" + value.toFixed(2);
+            return "$" + value + "M";
           },
         },
       },
@@ -586,7 +588,7 @@ new Chart(bestSellerCityChartCtx, {
     tooltip: {
       callbacks: {
         label: function (tooltipItem) {
-          return "$" + tooltipItem.raw.toFixed(2);
+          return "$" + tooltipItem.raw + "M";
         },
       },
     },
@@ -603,8 +605,8 @@ new Chart(topProfitableCityChartCtx, {
     labels: [
       "New York City",
       "Los Angeles",
-      "Seattle San",
-      "San Fransisco",
+      "Seattle",
+      "San Francisco",
       "Columbus",
     ],
     datasets: [
@@ -617,15 +619,20 @@ new Chart(topProfitableCityChartCtx, {
     ],
   },
   options: {
-    indexAxis: "y",
+    indexAxis: "y", // Ensures the labels are displayed on the y-axis
     scales: {
-      y: {
+      x: {
+        // Scales x for the horizontal axis
         beginAtZero: true,
         ticks: {
           callback: function (value) {
-            return "$" + value.toFixed(2);
+            return "$" + (value / 1000).toFixed(2) + "M";
           },
         },
+      },
+      y: {
+        // Scales y for the vertical axis
+        beginAtZero: true,
       },
     },
   },
@@ -633,7 +640,7 @@ new Chart(topProfitableCityChartCtx, {
     tooltip: {
       callbacks: {
         label: function (tooltipItem) {
-          return "$" + tooltipItem.raw.toFixed(2);
+          return "$" + (tooltipItem.raw / 1000).toFixed(2) + "M";
         },
       },
     },
@@ -705,6 +712,58 @@ new Chart(profitbySegmentChartCtx, {
         backgroundColor: "rgb(124, 191, 125)",
         data: [2236557753.26, 1358000000, 842935000],
         borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    indexAxis: "y",
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+});
+
+const bestDiscountChartCtx = document
+  .getElementById("bestDiscountChart")
+  .getContext("2d");
+
+const labels = [
+  "0.2",
+  "0.7",
+  "0.8",
+  "0.3",
+  "0.4",
+  "0.6",
+  "0.1",
+  "0.5",
+  "0.15",
+  "0.32",
+];
+const dataBuyer = [2435, 0, 0, 18, 21, 0, 77, 0, 30, 0];
+const dataDiskonHunter = [689, 418, 300, 207, 181, 138, 6, 66, 18, 27];
+const dataRoyalBuyer = [533, 0, 0, 1, 4, 0, 11, 0, 4, 0];
+
+const bestDiscountChart = new Chart(bestDiscountChartCtx, {
+  type: "bar",
+  data: {
+    labels: labels,
+    datasets: [
+      {
+        label: "Buyer",
+        backgroundColor: "rgb(124, 191, 125)",
+        data: dataBuyer,
+      },
+      {
+        label: "Diskon Hunter",
+        backgroundColor: "rgba(34, 110, 30)",
+        data: dataDiskonHunter,
+      },
+      {
+        label: "Royal Buyer",
+        backgroundColor: "rgb(34, 34, 34)",
+        data: dataRoyalBuyer,
       },
     ],
   },

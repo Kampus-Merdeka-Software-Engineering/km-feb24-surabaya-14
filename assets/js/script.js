@@ -786,19 +786,10 @@ const customerSegmentChart = new Chart(customerSegmentChartCtx, {
     labels: ["Consumer", "Corporate", "Home Office"],
     datasets: [
       {
-        label: "Consumer",
+        label: "Costumer ID",
         backgroundColor: "rgb(124, 191, 125)",
-        data: [409, 0, 0],
-      },
-      {
-        label: "Corporate",
-        backgroundColor: "rgba(34, 34, 34)",
-        data: [0, 246, 0],
-      },
-      {
-        label: "Home Office",
-        backgroundColor: "rgb(34, 110, 30)",
-        data: [0, 0, 148],
+        data: [409, 246, 148],
+        borderWidth: 1,
       },
     ],
   },

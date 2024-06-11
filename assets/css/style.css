@@ -860,8 +860,8 @@ canvas {
   }
 
   .container_table {
+    width: 100%;
     padding: 5px;
-    height: 100px;
     transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
   }
 
@@ -898,13 +898,14 @@ canvas {
 
 @media (max-width: 300px) {
   .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 24px;
-    padding-top: 24px;
-    max-width: auto;
-    width: 100%;
-    cursor: default;
+    width: 50%;
+    padding: 10px;
+    transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
+  }
+
+  canvas {
+    width: 30% !important;
+    /* height: 0px !important; */
   }
 }
 

@@ -784,6 +784,14 @@ canvas {
     gap: 0.5rem;
   }
 
+  .burger {
+    position: absolute;
+    right: 30px; /* Adjust as needed */
+    top: 55px;
+    transform: translateY(-50%);
+    z-index: 3;
+  }
+
   .background {
     margin: 0;
     border-radius: 0;

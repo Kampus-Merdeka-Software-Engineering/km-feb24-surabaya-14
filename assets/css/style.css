@@ -136,7 +136,7 @@ nav ul.navbar li a {
 .explain {
   padding: 1rem;
   border-radius: 10px;
-  max-width: 90%; /* Radius sudut border */
+  max-width: 90%;
   margin-left: 6.6rem;
   margin-bottom: 2rem;
   background-color: #fff;
@@ -539,6 +539,12 @@ canvas {
     font-size: small;
     padding: 2%;
   }
+
+  .explain {
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+    margin-bottom: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -741,6 +747,12 @@ canvas {
     width: 100%;
     padding: 5px;
     transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
+  }
+
+  .explain {
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
+    margin-bottom: 0;
   }
 }
 

@@ -61,8 +61,9 @@ header .logo {
 
 .logo img {
   width: 50%;
-  max-width: 150px; /* Atur max-width agar logo tidak terlalu besar */
-  height: auto; /* Pastikan tinggi otomatis mengikuti lebar untuk menjaga aspek rasio */
+  max-width: 150px;
+  height: auto;
+  cursor: pointer;
 }
 
 /* Navigation Bar */
@@ -72,6 +73,7 @@ header .logo {
   gap: 3rem;
   margin: 0;
   padding-right: 0.4em;
+  cursor: pointer;
   /* transition: all 0.5s ease; */
 }
 
@@ -84,7 +86,6 @@ nav ul.navbar li a {
 .burger {
   display: none;
   flex-direction: column;
-  cursor: pointer;
 }
 
 .burger div {
@@ -339,12 +340,13 @@ table {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  cursor: default;
 }
 
 table th,
 table td {
   padding: 10px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #ddd;
 }
 
@@ -437,6 +439,7 @@ table th {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   grid-gap: 24px;
+  cursor: default;
 }
 
 #dashboard .box-info li {
@@ -484,6 +487,7 @@ table th {
   padding-top: 24px;
   max-width: auto;
   width: 100%;
+  cursor: default;
 }
 
 .chart-container {
@@ -505,6 +509,40 @@ canvas {
   height: 400px !important;
 }
 /* Media Queries untuk Responsive Design */
+@media (max-width: 1406px) {
+  .container_table {
+    padding: 10px;
+    margin-block: 15px;
+    margin-inline: 10px;
+  }
+
+  table th,
+  table td {
+    padding: 8px;
+  }
+
+  #pagination {
+    flex-direction: column;
+    margin-top: 10px;
+  }
+
+  #pagination button {
+    margin: 5px 0;
+  }
+
+  #page-info,
+  #page-input {
+    font-size: 14px;
+  }
+
+  #page-info {
+    margin: 5px 0;
+  }
+
+  #page-input {
+    width: 40px;
+  }
+}
 
 @media (max-width: 1200px) {
   .logo img {
@@ -548,32 +586,54 @@ canvas {
 }
 
 @media (max-width: 768px) {
-  .navbar {
-    display: none;
-    flex-direction: row;
-    width: 100%;
-    /* position: absolute; */
-    top: 0px;
-    left: 0px;
-    background-color: var(--dark);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease, visibility 0.5s ease;
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .burger {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    cursor: pointer;
+    position: absolute;
+    right: 30px; /* Adjust as needed */
+    top: 62px;
+    transform: translateY(-50%);
+    z-index: 3;
+  }
+
+  .burger div {
+    width: 24px;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s linear;
+  }
+
+  .navbar {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--dark);
+    opacity: 0;
+    visibility: hidden;
+    align-items: center;
+    justify-content: center; /* Center content vertically */
+    padding: 20px 0;
+    z-index: 4;
+    border-radius: 20px;
   }
 
   .navbar.nav-active {
     display: flex;
     opacity: 1;
     visibility: visible;
-    padding-left: 5%;
+    margin: 0 0.5em;
   }
 
   .burger.toggle .line1 {
-    transform: rotate(-45deg) translate(-5px, 6px);
+    transform: rotate(-45deg) translate(-12px, 5px);
   }
 
   .burger.toggle .line2 {
@@ -581,7 +641,25 @@ canvas {
   }
 
   .burger.toggle .line3 {
-    transform: rotate(45deg) translate(-5px, -6px);
+    transform: rotate(45deg) translate(-11px, -5px);
+  }
+
+  header .logo {
+    height: auto;
+    position: relative;
+    z-index: 3;
+    background-color: var(--dark);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .logo img {
+    width: 15%;
+    max-width: 150px;
+    height: auto;
+    cursor: pointer;
   }
 
   .slide-content {

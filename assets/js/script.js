@@ -776,4 +776,38 @@ const bestDiscountChart = new Chart(bestDiscountChartCtx, {
     },
   },
 });
+
+const customerSegmentChartCtx = document
+  .getElementById("customerSegmentChart")
+  .getContext("2d");
+const customerSegmentChart = new Chart(customerSegmentChartCtx, {
+  type: "bar",
+  data: {
+    labels: ["Consumer", "Corporate", "Home Office"],
+    datasets: [
+      {
+        label: "Consumer",
+        backgroundColor: "rgb(124, 191, 125)",
+        data: [409, 0, 0],
+      },
+      {
+        label: "Corporate",
+        backgroundColor: "rgba(34, 34, 34)",
+        data: [0, 246, 0],
+      },
+      {
+        label: "Home Office",
+        backgroundColor: "rgb(34, 110, 30)",
+        data: [0, 0, 148],
+      },
+    ],
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+});
 // Sampai sini js CHART

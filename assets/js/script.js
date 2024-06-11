@@ -332,6 +332,8 @@ document.addEventListener("DOMContentLoaded", () => {
           },
         },
       },
+      responsive: true,
+      maintainAspectRatio: false,
     },
   });
 

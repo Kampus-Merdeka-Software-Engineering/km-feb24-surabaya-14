@@ -854,9 +854,50 @@ canvas {
   }
 
   .container {
-    width: 50%;
-    padding: 10px;
+    height: 100%;
+    width: auto; /* Biarkan lebar container ditentukan oleh isinya */
+    padding: 5px;
+    margin: 5px;
+    display: grid;
+    justify-content: center; /* Pusatkan konten secara horizontal */
+    align-items: center; /* Pusatkan konten secara vertikal */
     transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
+  }
+
+  canvas {
+    width: 100% !important;
+    max-width: 400px; /* Batas maksimal lebar canvas */
+    height: auto !important;
+    max-height: 200px; /* Batas maksimal tinggi canvas */
+    font-size: 0.8em;
+  }
+
+  .chart-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: grid;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px; /* Batas maksimal lebar chart-container */
+    margin: 0 auto; /* Pusatkan chart-container */
+  }
+
+  .chart-container h3 {
+    font-size: 0.8rem; /* Ukuran font untuk judul */
+    margin-bottom: 10px; /* Jarak bawah judul */
+    text-align: center; /* Pusatkan teks judul */
+  }
+
+  .chart-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    display: grid;
+    flex-direction: column;
+    align-items: center;
   }
 
   .container_table {
@@ -874,6 +915,7 @@ canvas {
   .wrapper .carousel {
     grid-auto-columns: calc((100% / 1) - 9px);
   }
+
   .carousel .card h2 {
     font-weight: 500;
     font-size: 0.8em;
@@ -893,19 +935,6 @@ canvas {
     font-weight: bold;
     font-family: var(--lato);
     margin-top: 20px;
-  }
-}
-
-@media (max-width: 300px) {
-  .container {
-    width: 50%;
-    padding: 10px;
-    transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
-  }
-
-  canvas {
-    width: 30% !important;
-    /* height: 0px !important; */
   }
 }
 

@@ -77,7 +77,7 @@ header .logo {
   /* transition: all 0.5s ease; */
 }
 
-nav ul.navbar li a {
+nav ul.navbar .nav a {
   text-decoration: none;
   color: var(--grey);
   font-weight: bold;
@@ -618,7 +618,6 @@ canvas {
   .navbar {
     display: none;
     flex-direction: column;
-    width: 100%;
     background-color: var(--dark);
     opacity: 0;
     visibility: hidden;
@@ -636,6 +635,11 @@ canvas {
     margin: 0 0.5em;
   }
 
+  .navbar .nav {
+    margin: 10px 0;
+    text-decoration: none;
+    font-size: 18px;
+  }
   .burger.toggle .line1 {
     transform: rotate(-45deg) translate(-12px, 5px);
   }
@@ -687,9 +691,10 @@ canvas {
   }
 
   .container {
-    width: 95%;
+    width: 100%;
     padding: 10px;
     transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
+    display: grid;
   }
 
   table,
@@ -862,6 +867,7 @@ canvas {
     justify-content: center; /* Pusatkan konten secara horizontal */
     align-items: center; /* Pusatkan konten secara vertikal */
     transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
+    grid-template-columns: 1fr;
   }
 
   canvas {
@@ -880,8 +886,6 @@ canvas {
     display: grid;
     flex-direction: column;
     align-items: center;
-    max-width: 400px; /* Batas maksimal lebar chart-container */
-    margin: 0 auto; /* Pusatkan chart-container */
   }
 
   .chart-container h3 {

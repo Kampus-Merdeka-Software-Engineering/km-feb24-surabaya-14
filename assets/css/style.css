@@ -542,6 +542,10 @@ canvas {
   #page-input {
     width: 40px;
   }
+
+  .wrapper .carousel {
+    grid-auto-columns: calc((100% / 3) - 9px);
+  }
 }
 
 @media (max-width: 1200px) {
@@ -772,6 +776,26 @@ canvas {
   table td:nth-of-type(14):before {
     content: "Outlier";
   }
+
+  .carousel .card h2 {
+    font-weight: 500;
+    font-size: 0.8em;
+    margin: 30px 0 5px;
+    font-family: var(--poppins);
+  }
+
+  .carousel .card span {
+    color: #6a6d78;
+    font-size: 0.8em;
+    font-family: var(--poppins);
+  }
+  .member h1 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: var(--lato);
+    margin-top: 20px;
+  }
 }
 
 @media (max-width: 500px) {
@@ -829,9 +853,15 @@ canvas {
     font-size: 0.8em;
   }
 
+  .container {
+    width: 50%;
+    padding: 10px;
+    transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
+  }
+
   .container_table {
-    width: 100%;
     padding: 5px;
+    height: 100px;
     transform: scale(1); /* Kembalikan skala ke normal untuk layar kecil */
   }
 
@@ -839,6 +869,42 @@ canvas {
     margin-left: 3.5rem;
     margin-right: 3.5rem;
     margin-bottom: 0;
+  }
+
+  .wrapper .carousel {
+    grid-auto-columns: calc((100% / 1) - 9px);
+  }
+  .carousel .card h2 {
+    font-weight: 500;
+    font-size: 0.8em;
+    margin: 30px 0 5px;
+    font-family: var(--poppins);
+  }
+
+  .carousel .card span {
+    color: #6a6d78;
+    font-size: 0.8em;
+    font-family: var(--poppins);
+  }
+
+  .member h1 {
+    margin-bottom: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    font-family: var(--lato);
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 300px) {
+  .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 24px;
+    padding-top: 24px;
+    max-width: auto;
+    width: 100%;
+    cursor: default;
   }
 }
 

@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let totalPages = 1;
   let data = [];
   let filteredData = [];
-  let sortColumn = null;
-  let sortDirection = null;
 
   fetch("./Superstore.json")
     .then((response) => response.json())
@@ -113,53 +111,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     pageInput.classList.add("hidden");
     pageInfo.classList.remove("hidden");
-  }
-  function setupSorting() {
-    document.querySelectorAll("#Superstore-table th").forEach((th) => {
-      th.addEventListener("click", function () {
-        const column = th.getAttribute("data-column");
-        if (sortColumn === column) {
-          sortDirection = sortDirection === "asc" ? "desc" : "asc";
-        } else {
-          sortColumn = column;
-          sortDirection = "asc";
-        }
-        sortTableData();
-        displayPage(currentPage);
-        updateSortIndicators();
-      });
-    });
-  }
-
-  function sortTableData() {
-    filteredData.sort((a, b) => {
-      let aValue = a[sortColumn];
-      let bValue = b[sortColumn];
-
-      // Convert to Date objects if sorting by date
-      if (sortColumn.includes("Date")) {
-        aValue = new Date(aValue);
-        bValue = new Date(bValue);
-      }
-
-      if (sortDirection === "asc") {
-        return aValue > bValue ? 1 : -1;
-      } else {
-        return aValue < bValue ? 1 : -1;
-      }
-    });
-  }
-
-  function updateSortIndicators() {
-    document.querySelectorAll("#Superstore-table th").forEach((th) => {
-      th.classList.remove("sorted-asc", "sorted-desc");
-      if (th.getAttribute("data-column") === sortColumn) {
-        if (sortDirection === "asc") {
-          th.classList.add("sorted-asc");
-        } else {
-          th.classList.add("sorted-desc");
-        }
-      }
-    });
   }
 });
